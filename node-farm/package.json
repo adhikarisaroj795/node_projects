@@ -1,0 +1,15 @@
+{
+  "name": "farm",
+  "version": "1.0.0",
+  "description": "learning node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "saroj",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.0",
+    "slugify": "^1.6.6"
+  }
+}

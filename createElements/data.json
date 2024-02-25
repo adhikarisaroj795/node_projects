@@ -1,0 +1,45 @@
+[
+    {
+      "id": 0,
+      "name": "Saroj Adhikari",
+      "stdid": "3921",
+      "address": "ithari",
+      "phone": "9825953356"
+     
+    },
+    {
+        "id": 1,
+      "name": "bipin Giri",
+      "stdid": "3964",
+      "address": "Jhapa",
+      "phone": "986070089"
+     
+    },
+    {
+        "id": 0,
+        "name": "manoram subedi",
+        "stdid": "3956",
+        "address": "pokhara",
+        "phone": "9817916244"
+       
+    },
+    {
+        "id": 0,
+        "name": "aagya  parajuli",
+        "stdid": "3957",
+        "address": "Jhapa",
+        "phone": "9861617100"
+       
+    },
+    {
+        "id": 0,
+        "name": "barsa karki",
+        "stdid": "3927",
+        "address": "synja",
+        "phone": "98032578452"
+       
+    }
+
+
+]
+  

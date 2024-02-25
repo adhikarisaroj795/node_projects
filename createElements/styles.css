@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.section-p{
+    padding: 20px 80px;
+}
+
+#input-section{
+ text-align: center;
+
+ /* background-color: red; */
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+form input{
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+form button{
+    width: 20%;
+}
+#display-id{
+    text-align: center;
+}
+
+.flex-container{
+    justify-content: center;
+    
+   background-color: azure;
+    display: flex;
+   
+    flex-wrap: wrap;
+}
+.flex-container .single-post{
+    border: 1px solid blue;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 20px;
+    color: red;
+}
+.flex-container .single-post h1{
+    background-color: black;
+}
