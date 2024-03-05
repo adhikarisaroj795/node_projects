@@ -1,9 +1,10 @@
-import React from 'react';
-import './App.css';
-import Nav from './component/Nav';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Footer from './component/Footer';
-import SignUp from './component/SignUp';
+import React from "react";
+import "./App.css";
+import Nav from "./component/Nav";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./component/Footer";
+import SignUp from "./component/SignUp";
+import PrivateComponent from "./component/PrivateComponent";
 
 function App() {
   return (
@@ -11,11 +12,14 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<h1>Product Listing Component</h1>} />
-          <Route path="/add" element={<h1>Add Product Component</h1>} />
-          <Route path="/update" element={<h1>Update Product Component</h1>} />
-          <Route path="/logout" element={<h1>Logout Component</h1>} />
-          <Route path="/profile" element={<h1>profile Component</h1>} />
+          <Route element={<PrivateComponent />}>
+            <Route path="/" element={<h1>Product Listing Component</h1>} />
+            <Route path="/add" element={<h1>Add Product Component</h1>} />
+            <Route path="/update" element={<h1>Update Product Component</h1>} />
+            <Route path="/logout" element={<h1>Logout Component</h1>} />
+            <Route path="/profile" element={<h1>profile Component</h1>} />
+          </Route>
+
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
