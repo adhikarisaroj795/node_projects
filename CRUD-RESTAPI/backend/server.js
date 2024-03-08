@@ -36,6 +36,36 @@ app.post("/create", (req, res) => {
       .json({ success: true, message: "Student created successfully" });
   });
 });
+app.put("/update/:id", (req, res) => {
+  const sql = "update  student set Name = ?, Email = ? where ID = ? ";
+  const values = [req.body.name, req.body.email];
+  const id = req.params.id;
+  db.query(sql, [...values, id], (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error creating student" });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Student created successfully" });
+  });
+});
+app.delete("/student/:id", (req, res) => {
+  const sql = "DELETE FROM student WHERE ID = ? ";
+  const id = req.params.id;
+
+  db.query(sql, [id], (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error deleting student" });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Student delete successfully" });
+  });
+});
 
 const PORT = 3921;
 app.listen(PORT, () => {
