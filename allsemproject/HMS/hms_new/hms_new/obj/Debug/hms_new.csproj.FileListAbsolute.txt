@@ -1,0 +1,39 @@
+C:\Users\DELL\source\repos\hms_new\hms_new\bin\Debug\hms_new.exe.config
+C:\Users\DELL\source\repos\hms_new\hms_new\bin\Debug\hms_new.exe
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.changepw.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.forgotpw.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.login.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.mainpage.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.Properties.Resources.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.csproj.GenerateResource.cache
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.exe
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.pdb
+C:\Users\DELL\source\repos\hms_new\hms_new\bin\Debug\hms_new.pdb
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.addstudent.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.allrecords.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.update.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.payment.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.roomdetail.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.signup.resources
+C:\Users\DELL\source\repos\hms_new\hms_new\obj\Debug\hms_new.csprojAssemblyReference.cache
+D:\proj backup\hms_new\hms_new\bin\Debug\hms_new.exe.config
+D:\proj backup\hms_new\hms_new\bin\Debug\hms_new.exe
+D:\proj backup\hms_new\hms_new\bin\Debug\hms_new.pdb
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.addstudent.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.allrecords.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.changepw.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.forgotpw.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.login.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.mainpage.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.payment.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.roomdetail.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.update.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.Properties.Resources.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.signup.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.csproj.GenerateResource.cache
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.exe
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.pdb
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.about.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.setting.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.studentlogin.resources
+D:\proj backup\hms_new\hms_new\obj\Debug\hms_new.csprojAssemblyReference.cache

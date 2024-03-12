@@ -1,0 +1,100 @@
+﻿
+
+<div class="row">
+    <div class="col-sm-4">
+        @using (Html.BeginForm("Save", "ReturnBook", FormMethod.Post))
+        {
+            //return book
+            <div>
+                <h3>Return Book</h3>
+            </div>
+            <div class="form-group">
+                <label>Member ID</label>
+                <input type="text" id="mid" name="mid" class="form-control" placeholder="Member ID" required />
+            </div>
+
+            //book name
+            <div class="form-group">
+                <label>Book</label>
+                <input type="text" id="book" name="book" class="form-control" placeholder="Book Name" required />
+            </div>
+
+            //return
+            <div class="form-group">
+                <label class="form-label">Return Date</label>
+                <input type="text" id="returndate" name="returndate" class="form-control" required />
+            </div>
+
+            //days elaps
+            <div class="form-group">
+                <label>Days Elaps</label>
+                <input type="text" id="elap" name="elap" class="form-control" required />
+            </div>
+
+            //fine
+            <div class="form-group">
+                <label>Fine</label>
+                <input type="text" id="fine" name="fine" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" required />
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script>
+
+        getMid();
+        function getMid()
+        {
+            $("#mid").keyup(function (e) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ReturnBook/GetMid?mid=' + $("#mid").val(),
+                    dataType: 'JSON',
+                    success: function (data)
+                    {
+
+                        console.log(data);   //checking if data is coming or not
+
+                        $("#book").val(data[0].BookName);  //getting book name
+
+                        $("#returndate").val(new Date(parseInt(data[0].ReturnDate.substr(6))).toLocaleDateString());  //getting return date
+
+                        var elap = date[0].ElapsedDate;
+
+                        if (elap > 0)
+                        {
+                            
+                            var fine = elap * 100;
+                            $('#elap').val(elap);
+                            $('#fine').val(fine.toString());
+                        }
+                        else
+                        {
+                            $('#elap').val("0");
+                            $('#fine').val("0");
+                        }
+                    }
+                });
+            });
+        }
+
+    </script>
+}
+
+
+

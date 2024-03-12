@@ -1,0 +1,17 @@
+F:\PROJ\proj\proj\bin\Debug\proj.exe.config
+F:\PROJ\proj\proj\bin\Debug\proj.exe
+F:\PROJ\proj\proj\bin\Debug\proj.pdb
+F:\PROJ\proj\proj\bin\Debug\MetroFramework.dll
+F:\PROJ\proj\proj\bin\Debug\MetroFramework.Fonts.dll
+F:\PROJ\proj\proj\obj\Debug\proj.csprojAssemblyReference.cache
+F:\PROJ\proj\proj\obj\Debug\proj.Properties.Resources.resources
+F:\PROJ\proj\proj\obj\Debug\proj.csproj.GenerateResource.cache
+F:\PROJ\proj\proj\obj\Debug\proj.csproj.CoreCompileInputs.cache
+F:\PROJ\proj\proj\obj\Debug\proj.csproj.CopyComplete
+F:\PROJ\proj\proj\obj\Debug\proj.exe
+F:\PROJ\proj\proj\obj\Debug\proj.pdb
+F:\PROJ\proj\proj\obj\Debug\proj.MainFrm.resources
+F:\PROJ\proj\proj\obj\Debug\proj.LoginFrm.resources
+F:\PROJ\proj\proj\obj\Debug\proj.FormAddClass.resources
+F:\PROJ\proj\proj\obj\Debug\proj.StudentsForm.resources
+F:\PROJ\proj\proj\obj\Debug\proj.RegistrationFrm.resources
