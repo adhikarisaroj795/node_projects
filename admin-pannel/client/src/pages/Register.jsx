@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const URL = "http://localhost:3030/api/auth/register";
   const [user, setUser] = useState({
     username: "",
     email: "",
     phone: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   //   handling the input values
 
   const handleInput = (e) => {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
 
     let name = e.target.name;
     let value = e.target.value;
@@ -25,9 +28,31 @@ const Register = () => {
 
   //handle cform submission
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        setUser({
+          username: "",
+          email: "",
+          phone: "",
+          password: "",
+        });
+        navigate("/login");
+      }
+      // console.log(response);
+    } catch (error) {
+      console.log("register :", error);
+    }
   };
   return (
     <>
