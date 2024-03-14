@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Analytics } from "../components/Analytics";
+import { useAuth } from "../store/Auth";
 
 const About = () => {
+  const { user } = useAuth();
+  const username = user.username;
+  console.log(user);
+
   return (
     <>
       <main>
@@ -9,7 +14,10 @@ const About = () => {
         <section className="section-hero">
           <div className="container grid grid-two-cols">
             <div className="hero-content">
-              <p>WELCOME, Saroj Adhikarir</p>
+              <p>
+                Welcome,
+                {user ? ` ${username}  to our website` : ` to our website`}
+              </p>
               <h1>Why Choose Us?</h1>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam,

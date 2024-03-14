@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../store/Auth";
 
 const Contact = () => {
   const [msg, setMsg] = useState({
@@ -6,6 +7,19 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [userData, setUserDAta] = useState(true);
+
+  const { user } = useAuth();
+
+  if (userData && user) {
+    setMsg({
+      username: user.username,
+      email: user.email,
+      message: "",
+    });
+
+    setUserDAta(false);
+  }
 
   const handleInput = (e) => {
     e.preventDefault();
@@ -25,7 +39,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(msg);
+    // console.log(msg);
   };
   return (
     <>
@@ -107,3 +121,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
+//32 start
