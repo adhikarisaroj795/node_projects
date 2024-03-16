@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/Auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const URL = "http://localhost:3030/api/auth/login";
@@ -37,10 +38,10 @@ const Login = () => {
         body: JSON.stringify(user),
       });
 
+      const res_data = await response.json();
       console.log("loginform:", response);
       if (response.ok) {
-        alert("login sucessfull");
-        const res_data = await response.json();
+        // alert("login sucessfull");
         storeTokeninLs(res_data.token);
 
         // localStorage.setItem("token", res_data.token);
@@ -48,9 +49,13 @@ const Login = () => {
           email: "",
           password: "",
         });
+        toast.success("Login sucessfull ");
+
         navigate("/");
       } else {
-        alert("invalid credential");
+        toast.error(
+          res_data.extraDetails ? res_data.extraDetails : res_data.message
+        );
         console.log("invalid credential");
       }
     } catch (error) {

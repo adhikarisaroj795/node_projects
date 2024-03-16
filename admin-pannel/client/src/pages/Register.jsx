@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/Auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const URL = "http://localhost:3030/api/auth/register";
@@ -44,8 +45,8 @@ const Register = () => {
         body: JSON.stringify(user),
       });
 
+      const res_data = await response.json();
       if (response.ok) {
-        const res_data = await response.json();
         console.log("res from server", res_data);
 
         //function to store token in local storage
@@ -57,7 +58,12 @@ const Register = () => {
           phone: "",
           password: "",
         });
+        toast.success("Registration sucessfull ");
         navigate("/login");
+      } else {
+        toast.error(
+          res_data.extraDetails ? res_data.extraDetails : res_data.message
+        );
       }
       // console.log(response);
     } catch (error) {

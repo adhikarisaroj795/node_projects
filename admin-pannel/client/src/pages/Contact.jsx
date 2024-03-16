@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useAuth } from "../store/Auth";
+import { toast } from "react-toastify";
+
+const defaultContactFormdata = {
+  username: "",
+  email: "",
+  message: "",
+};
 
 const Contact = () => {
-  const [msg, setMsg] = useState({
-    username: "",
-    email: "",
-    message: "",
-  });
+  const [msg, setMsg] = useState(defaultContactFormdata);
   const [userData, setUserDAta] = useState(true);
 
   const { user } = useAuth();
@@ -37,9 +40,27 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(msg);
+    try {
+      const response = await fetch("http://localhost:3030/api/form/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(msg),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMsg(defaultContactFormdata);
+        console.log(data);
+        toast.success(data.extraDetails ? data.extraDetails : data.message);
+      } else {
+        toast.error(data.extraDetails ? data.extraDetails : data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -122,4 +143,4 @@ const Contact = () => {
 
 export default Contact;
 
-//32 start
+//32 sakeyo
