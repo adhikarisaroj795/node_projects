@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --primary-color: #1E90FF;
+    --secondary-color: #6c757d;
+  }
+.nav-container{
+ 
+    max-width: 1250px;
+    margin: auto;
+    padding: 10px 10px;
+
+}
+.logo a{
+    text-decoration: none;
+    text-align: center;
+    color: blanchedalmond;
+    font-size: 1.3rem;
+}
+.navbar{
+    position: fixed;
+    /* z-index: 1000; */
+    width: 100%;
+    padding: 25px 0;
+    background:var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.ul-list{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-list{
+    display: flex;
+    gap: 15px;
+  
+}
+.menu-list li{
+list-style: none;
+a{
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: aliceblue;
+    
+}
+}
