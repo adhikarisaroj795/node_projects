@@ -25,6 +25,10 @@ const nepalisongSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 // song, singer music label, language, released DAte, Duration:, lyrics

@@ -3,6 +3,7 @@ const express = require('express');
 const connectDb = require('./dbCon/db');
 const addNepaliSongs = require('./controller/nepalisong-controller');
 const nepalisongRoute = require('./router/nepalisongRouter');
+const errorMiddleware = require('./middleware/error-middleware');
 
 const app = express();
 
@@ -15,8 +16,10 @@ app.use('/api/add', nepalisongRoute);
 
 // });
 
+app.use(errorMiddleware);
+
 ///SERVER.................///
-const PORT = 9999;
+const PORT = 2002;
 
 connectDb().then(() => {
   app.listen(PORT, () => {
