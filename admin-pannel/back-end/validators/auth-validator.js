@@ -1,19 +1,6 @@
 const { z } = require('zod');
 
 ///creating an object schema
-const imageValidator = z.string().refine(
-  (value) => {
-    // Example: Check if the value is a valid Base64 string
-    // This is a very basic check and might need to be adjusted based on your specific requirements
-    const base64Regex =
-      /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/;
-    return base64Regex.test(value);
-  },
-  {
-    message: 'Image must be a valid Base64-encoded string',
-    path: ['image'],
-  }
-);
 
 const signupSchema = z.object({
   username: z
