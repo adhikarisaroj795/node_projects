@@ -4,7 +4,7 @@ import { useAuth } from "../store/Auth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const URL = "http://localhost:3030/api/auth/login";
+  const URL = "http://localhost:8080/api/auth/login";
 
   const [user, setUser] = useState({
     email: "",

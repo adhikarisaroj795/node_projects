@@ -6,7 +6,9 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
   const [services, setServices] = useState([]);
+
   const storeTokeninLs = (servertoken) => {
+    setToken(servertoken);
     return localStorage.setItem("token", servertoken);
   };
 
@@ -23,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const useAuthentication = async () => {
     try {
-      const response = await fetch("http://localhost:3030/api/auth/user", {
+      const response = await fetch("http://localhost:8080/api/auth/user", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   //to fetch services data from the database
   const getServices = async () => {
     try {
-      const response = await fetch("http://localhost:3030/api/data/service", {
+      const response = await fetch("http://localhost:8080/api/data/service", {
         method: "GET",
       });
       if (response.ok) {

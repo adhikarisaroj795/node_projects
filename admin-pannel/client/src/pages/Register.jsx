@@ -4,7 +4,7 @@ import { useAuth } from "../store/Auth";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const URL = "http://localhost:3030/api/auth/register";
+  const URL = "http://localhost:8080/api/auth/register";
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -59,7 +59,7 @@ const Register = () => {
           password: "",
         });
         toast.success("Registration sucessfull ");
-        navigate("/login");
+        navigate("/");
       } else {
         toast.error(
           res_data.extraDetails ? res_data.extraDetails : res_data.message

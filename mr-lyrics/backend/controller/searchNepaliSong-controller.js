@@ -6,7 +6,7 @@ const searchNepaliSong = async (req, res) => {
     const searchedSong = await nepalisongModel.find({
       songname: new RegExp(req.params.songname, 'i'),
     });
-    console.log(searchedSong);
+    // console.log(searchedSong);
     res.status(200).json(searchedSong);
   } catch (error) {
     console.error('searchError', error.message);
