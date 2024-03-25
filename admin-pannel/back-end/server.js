@@ -38,3 +38,5 @@ connectDb().then(() => {
     console.log(`server is listinig at ${PORT}`);
   });
 });
+
+//48 sakeyo

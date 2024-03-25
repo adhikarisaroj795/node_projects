@@ -246,4 +246,50 @@ a.active{
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 1fr;
 }
+/* //////////////////// Admin Pannel */
+
+td{
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  padding: 3rem;
+  text-align: center;
+  color: var(--dark-color);
+  width: 30rem;
+}
+table{
+  background: #fff;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+  border-collapse: collapse;
+  border-radius: 1rem;
+
+}
+.admin-contacts-section{
+  padding: 2rem;
+}
+.updateLink {
+  background: #cff6dd;
+  color: #1fa750;
+  border-radius: 3rem;
+  padding: 1rem 4rem;
+
+  &:hover{
+    color: #cff6dd;
+    background: #1fa750;
+    font-weight: bold;
+  }
+}
+
+body tr{
+  display: grid;
+  grid-template-columns: repeat(5, minmax(10rem, 1fr));
+  align-items: center;
+  /* text-align: center; */
+  box-shadow: 0 0.3rem 0 gray;
+  margin-bottom: 10px;
+  border-bottom: 4px solid transparent;
+  color: var(--bg-color);
+  &:last-child{
+    box-shadow: none;
+  }
+}
 
