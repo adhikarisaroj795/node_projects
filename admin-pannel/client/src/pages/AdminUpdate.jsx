@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/Auth";
+import { toast } from "react-toastify";
 
 export const AdminUpdate = () => {
   const [data, setData] = useState({
@@ -36,7 +37,40 @@ export const AdminUpdate = () => {
     getSingleUSerData();
   }, []);
 
-  const handleInput = () => {};
+  const handleInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  // to update the data dynamically
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/admin/users/update/${params.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authorizationToken,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (response.ok) {
+        toast.success("Update Sucessfull");
+      } else {
+        toast.error("Update Error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section className="section-contact">
       <div className="contact-content container">
@@ -46,7 +80,7 @@ export const AdminUpdate = () => {
       <div className="container grid grid-two-cols">
         {/* contact form actual content */}
         <section className="section-form">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="username">username</label>
               <input

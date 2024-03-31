@@ -20,6 +20,10 @@ router
   .get(authMiddleware, adminMiddleware, adminController.getAllContacts);
 
 router
+  .route('/contacts/delete/:id')
+  .delete(authMiddleware, adminMiddleware, adminController.deleteContactbyid);
+router
   .route('/users/delete/:id')
   .delete(authMiddleware, adminMiddleware, adminController.deleteUserById);
+
 module.exports = router;
