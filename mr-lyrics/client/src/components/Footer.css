@@ -1,0 +1,23 @@
+footer{
+    padding: 20px 80px;
+    background: #1b2430;
+   text-align: right;
+}
+.footermain{
+    text-align: center;
+    display: flex;
+    
+   
+    justify-content: space-between;
+& .footeritem h2{
+    padding: 5px;
+    font-size: 2.3rem;
+}   
+& .footeritem p{
+    padding: 5px;
+} 
+& .footeritem p:hover{
+    color: #17cf97;
+    cursor: pointer;
+} 
+}

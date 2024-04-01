@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./NavBarr.css";
 
 const NavBarr = () => {
@@ -16,9 +17,9 @@ const NavBarr = () => {
     <>
       <header>
         <div className="logo-brand">
-          <a href="#">
-            <img src="images/logo.png" alt="" />
-          </a>
+          <NavLink to="/">
+            <img className="imglogo" src="images/logo.png" alt="" />
+          </NavLink>
         </div>
         <nav>
           <ul id="navbar" className={clicked ? "#navbar active" : "#navbar"}>
@@ -33,18 +34,18 @@ const NavBarr = () => {
             ) : (
               <>
                 <li>
-                  <a className="active" href="#">
+                  <NavLink className="active" to="/">
                     Home
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="#">Nepali Lyrics</a>
+                  <NavLink to="/nepalisongs">Nepali Lyrics</NavLink>
                 </li>
                 <li>
-                  <a href="#">English Lyrics</a>
+                  <NavLink to="/englishsongs">English Lyrics</NavLink>
                 </li>
                 <li>
-                  <a href="#">Hindi Lyrics</a>
+                  <NavLink to="/hindisongs">Hindi Lyrics</NavLink>
                 </li>
               </>
             )}

@@ -5,8 +5,9 @@ header{
     background-color: #1b2430;
     padding: 20px 80px;
    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+   
 }
-img{
+.imglogo{
     width: 100px;
     height: auto;
     border-radius: 50%;
@@ -15,7 +16,7 @@ img{
     transition: transform 0.3s ease-in-out;
      
 }
-img:hover{
+.imglogo:hover{
     transform: scale(1.1);
 }
 
