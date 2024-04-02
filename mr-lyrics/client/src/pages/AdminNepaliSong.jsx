@@ -32,6 +32,11 @@ const AdminNepaliSong = () => {
               <label htmlFor="">Embedded link</label>
               <input type="text" />
             </div>
+
+            <div>
+              <label htmlFor="">Description</label>
+              <input type="text" />
+            </div>
           </form>
         </div>
         <div>
