@@ -6,12 +6,12 @@ const user_ctrl = new UserController();
 const uploder = require("../app/middleware/uploader.middleware");
 
 router
-  .route("/user")
+  .route("/")
   .get(user_ctrl.listAllUsers)
   .post(uploder.single("image"), user_ctrl.useRegister); //toupload multiple file use array()
 
 router
-  .route("/:user")
+  .route("/:id")
   .get(loginCheck, (req, res, next) => {})
   .patch((req, res, next) => {});
 

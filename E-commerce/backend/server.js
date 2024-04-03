@@ -2,6 +2,7 @@ const express = require("express");
 const routes = require("./routes/index");
 const errorMiddleware = require("./app/middleware/errormiddleware");
 const app = express();
+const eventEmitterMiddleware = require("./app/events/event.EmitterMiddleware");
 
 //data parsing
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(
   })
 );
 
+app.use(eventEmitterMiddleware);
 //routes
 app.use(routes);
 
