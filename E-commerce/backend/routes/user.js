@@ -8,7 +8,7 @@ const uploder = require("../app/middleware/uploader.middleware");
 router
   .route("/")
   .get(user_ctrl.listAllUsers)
-  .post(uploder.single("image"), user_ctrl.useRegister); //toupload multiple file use array()
+  .post(uploder.single("image"), user_ctrl.userRegister); //toupload multiple file use array()
 
 router
   .route("/:id")

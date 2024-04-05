@@ -1,3 +1,5 @@
+const userModel = require("../model/user.model");
+
 class userService {
   validateRegister = (data) => {
     let error_msgs = {};
@@ -14,6 +16,15 @@ class userService {
       error_msgs.role = "role is required";
     }
     return error_msgs;
+  };
+
+  userRegister = async (data) => {
+    try {
+      let user = new userModel(data);
+      return await user.save();
+    } catch (error) {
+      throw error;
+    }
   };
 }
 
