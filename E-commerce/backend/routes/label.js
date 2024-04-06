@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const loginCheck = require("../app/middleware/loginmiddleware");
+const isAdmin = require("../app/middleware/rbac.middlwware");
+const LabelController = require("../app/controller/label.controller");
+const lableCtrl = new LabelController();
 
 router
-  .route("/user")
+  .route("/")
   .get((req, res, next) => {
     res.json({ msg: "hello-world" });
   })
-  .post((req, res, next) => {});
+  .post(loginCheck, isAdmin, lableCtrl.store);
 
 router
-  .route("/:user")
+  .route("/:id")
   .get(loginCheck, (req, res, next) => {})
   .patch((req, res, next) => {});
 

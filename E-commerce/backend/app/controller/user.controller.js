@@ -45,7 +45,7 @@ class UserController {
         next({ status_code: 400, msg: "data requierd" });
       } else {
         const user = await this.auth_svc.login(data.username, data.password);
-        console.log("from controller", user);
+
         res.status(200).json({
           result: user,
           msg: "user logged in",

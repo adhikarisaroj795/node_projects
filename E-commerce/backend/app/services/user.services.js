@@ -1,4 +1,5 @@
 const userModel = require("../model/user.model");
+const bcrypt = require("bcrypt");
 
 class userService {
   validateRegister = (data) => {
@@ -20,8 +21,17 @@ class userService {
 
   userRegister = async (data) => {
     try {
+      data["password"] = bcrypt.hashSync(data["password"], 10);
       let user = new userModel(data);
       return await user.save();
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getUserById = async (user_id) => {
+    try {
+      return await userModel.findById(user_id);
     } catch (error) {
       throw error;
     }
