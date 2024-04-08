@@ -25,11 +25,16 @@ const UserSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+
     role: {
       type: String,
       required: true,
       enum: ["admin", "seller", "customer"],
       default: "customer",
+    },
+    image: {
+      type: String,
+      required: true,
     },
     address: {
       billing: LocationSchema,

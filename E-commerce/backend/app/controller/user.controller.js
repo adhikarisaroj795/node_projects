@@ -1,6 +1,8 @@
 const UserService = require("../services/user.services");
 const AuthServices = require("../services/auth.service");
 class UserController {
+  user_svc;
+  auth_svc;
   constructor() {
     this.user_svc = new UserService();
     this.auth_svc = new AuthServices();
@@ -10,10 +12,10 @@ class UserController {
     try {
       let data = req.body;
       let error_msgs = this.user_svc.validateRegister(data);
-
       if (req.file) {
         data["image"] = req.file.filename;
       }
+      console.log("db", data);
 
       if (Object.keys(error_msgs).length !== 0) {
         return next({
@@ -40,6 +42,7 @@ class UserController {
 
   userLogin = async (req, res, next) => {
     let data = req.body;
+    console.log("login", data);
     try {
       if (!data.username || !data.password) {
         next({ status_code: 400, msg: "data requierd" });

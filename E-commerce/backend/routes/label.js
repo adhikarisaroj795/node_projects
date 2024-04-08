@@ -3,18 +3,18 @@ const router = express.Router();
 const loginCheck = require("../app/middleware/loginmiddleware");
 const isAdmin = require("../app/middleware/rbac.middlwware");
 const LabelController = require("../app/controller/label.controller");
+const uploder = require("../app/middleware/uploader.middleware");
 const lableCtrl = new LabelController();
 
 router
   .route("/")
-  .get((req, res, next) => {
-    res.json({ msg: "hello-world" });
-  })
-  .post(loginCheck, isAdmin, lableCtrl.store);
+  .get(lableCtrl.getAllLabels)
+  .post(loginCheck, isAdmin, uploder.single("image"), lableCtrl.store);
 
 router
   .route("/:id")
   .get(loginCheck, (req, res, next) => {})
-  .patch((req, res, next) => {});
+  .put(loginCheck, isAdmin, uploder.single("image"), lableCtrl.update)
+  .delete(loginCheck, isAdmin, lableCtrl.deleteLabelById);
 
 module.exports = router;
