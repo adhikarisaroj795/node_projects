@@ -1,17 +1,19 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const loginCheck = require("../app/middleware/loginmiddleware");
+const loginCheck = require('../app/middleware/loginmiddleware');
+const isAdmin = require('../app/middleware/rbac.middlwware');
+const uploder = require('../app/middleware/uploader.middleware');
+const categoryController = require('../app/controller/category.controller');
+const cat_ctrl = new categoryController();
 
 router
-  .route("/user")
-  .get((req, res, next) => {
-    res.json({ msg: "hello-world" });
-  })
-  .post((req, res, next) => {});
-
+  .route('/')
+  .get(cat_ctrl.getAllCats)
+  .post(loginCheck, isAdmin, uploder.single('image'), cat_ctrl.createCategory);
 router
-  .route("/:user")
-  .get(loginCheck, (req, res, next) => {})
-  .patch((req, res, next) => {});
+  .route('/:id')
+  .get(cat_ctrl.getCategoryDetails)
+  .put(loginCheck, isAdmin, uploder.single('image'), cat_ctrl.updateCategory)
+  .delete(loginCheck, isAdmin, cat_ctrl.deleteCategoryByid);
 
 module.exports = router;
