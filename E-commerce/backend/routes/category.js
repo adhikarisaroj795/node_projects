@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const loginCheck = require('../app/middleware/loginmiddleware');
-const isAdmin = require('../app/middleware/rbac.middlwware');
+const { isAdmin } = require('../app/middleware/rbac.middlwware');
 const uploder = require('../app/middleware/uploader.middleware');
 const categoryController = require('../app/controller/category.controller');
 const cat_ctrl = new categoryController();

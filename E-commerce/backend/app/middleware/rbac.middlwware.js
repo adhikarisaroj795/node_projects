@@ -1,12 +1,23 @@
 const isAdmin = (req, res, next) => {
-  if (req.auth_user.role === "admin") {
+  if (req.auth_user.role === 'admin') {
     next();
   } else {
     next({
       status_code: 403,
-      msg: "Access Denied",
+      msg: 'Access Denied',
     });
   }
 };
 
-module.exports = isAdmin;
+const isAdminSeller = (req, res, next) => {
+  if (req.auth_user.role === 'admin' || req.auth_user.role === 'seller') {
+    next();
+  } else {
+    next({
+      status_code: 403,
+      msg: 'Access Denied',
+    });
+  }
+};
+
+module.exports = { isAdmin, isAdminSeller };
