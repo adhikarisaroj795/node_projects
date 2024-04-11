@@ -1,5 +1,5 @@
-const UserService = require("../services/user.services");
-const AuthServices = require("../services/auth.service");
+const UserService = require('../services/user.services');
+const AuthServices = require('../services/auth.service');
 class UserController {
   user_svc;
   auth_svc;
@@ -13,9 +13,9 @@ class UserController {
       let data = req.body;
       let error_msgs = this.user_svc.validateRegister(data);
       if (req.file) {
-        data["image"] = req.file.filename;
+        data['image'] = req.file.filename;
       }
-      console.log("db", data);
+      console.log('db', data);
 
       if (Object.keys(error_msgs).length !== 0) {
         return next({
@@ -24,11 +24,11 @@ class UserController {
         });
       } else {
         const response = await this.user_svc.userRegister(data);
-        console.log("response", response);
+        console.log('response', response);
         res.status(200).json({
           result: response,
           status: true,
-          msg: "user registered",
+          msg: 'user registered',
         });
       }
     } catch (error) {
@@ -42,16 +42,16 @@ class UserController {
 
   userLogin = async (req, res, next) => {
     let data = req.body;
-    console.log("login", data);
+    console.log('login', data);
     try {
       if (!data.username || !data.password) {
-        next({ status_code: 400, msg: "data requierd" });
+        next({ status_code: 400, msg: 'data requierd' });
       } else {
         const user = await this.auth_svc.login(data.username, data.password);
 
         res.status(200).json({
           result: user,
-          msg: "user logged in",
+          msg: 'user logged in',
         });
       }
     } catch (error) {

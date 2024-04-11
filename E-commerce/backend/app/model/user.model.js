@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const LocationSchema = new mongoose.Schema({
   location: {
     type: String,
@@ -22,17 +22,17 @@ const UserSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      enum: ["active", "inactive"],
-      default: "active",
+      enum: ['active', 'inactive'],
+      default: 'active',
     },
 
     role: {
       type: String,
       required: true,
-      enum: ["admin", "seller", "customer"],
-      default: "customer",
+      enum: ['admin', 'seller', 'customer'],
+      default: 'customer',
     },
-    image: {
+    images: {
       type: String,
       required: true,
     },
@@ -48,5 +48,5 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-const userModel = mongoose.model("User", UserSchema);
+const userModel = mongoose.model('User', UserSchema);
 module.exports = userModel;

@@ -8,17 +8,26 @@ const prod_ctrl = new productController();
 
 router
   .route('/')
-  .get((req, res, next) => {})
+  .get(prod_ctrl.getAllProducts)
   .post(
     loginCheck,
     isAdminSeller,
-    uploder.array('image'),
+    uploder.array('images'),
     prod_ctrl.addProduct
   );
 
 router
   .route('/:id')
-  .get((req, res, next) => {})
-  .patch((req, res, next) => {});
+  .get(prod_ctrl.getProductById)
+  .put(
+    loginCheck,
+    isAdminSeller,
+    uploder.array('images'),
+    prod_ctrl.updateProduct
+  )
+  .delete(loginCheck, isAdminSeller, prod_ctrl.deleteProduct);
 
+router
+  .route('/:id/:image_name')
+  .delete(loginCheck, isAdminSeller, prod_ctrl.deleteImage);
 module.exports = router;

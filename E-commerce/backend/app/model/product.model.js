@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const productSchema = new mongoose.Schema(
   {
     title: {
@@ -18,13 +19,15 @@ const productSchema = new mongoose.Schema(
       type: String,
       index: true,
     },
-    category: {
-      type: mongoose.Types.ObjectId,
-      ref: 'Category',
-      required: true,
-    },
+    category: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'Category',
+        required: true,
+      },
+    ],
     price: {
-      type: String,
+      type: Number,
       required: true,
       min: 1,
     },
@@ -35,14 +38,13 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     after_discount: {
-      type: String,
+      type: Number,
       required: true,
       min: 1,
     },
     brand: {
       type: mongoose.Types.ObjectId,
       ref: 'Label',
-      default: null,
     },
     is_featured: {
       type: Boolean,
@@ -51,12 +53,11 @@ const productSchema = new mongoose.Schema(
     seller: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      default: null,
     },
-    images: [string],
+    images: [String],
     status: {
       type: String,
-      enum: ['active, inactive'],
+      enum: ['active', 'inactive'],
       default: 'inactive',
     },
     meta: {

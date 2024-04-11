@@ -1,0 +1,5 @@
+/uploads
+.env
+/node-project/node_modules
+/api/node_modules
+api/uploads
