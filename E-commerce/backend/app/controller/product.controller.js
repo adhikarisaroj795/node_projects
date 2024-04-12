@@ -213,7 +213,7 @@ class productController {
         res.json({
           result: prod,
           status: true,
-          msg: 'product detail fetch sucess',
+          msg: 'product detail fetch sucesspp',
         });
       }
     } catch (error) {

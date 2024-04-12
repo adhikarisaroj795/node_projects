@@ -1,16 +1,17 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const loginCheck = require("../app/middleware/loginmiddleware");
-
+const loginCheck = require('../app/middleware/loginmiddleware');
+const OrderController = require('../app/controller/order.controller');
+const order_ctrl = new OrderController();
 router
-  .route("/order")
+  .route('/')
   .get((req, res, next) => {
-    res.json({ msg: "hello-world" });
+    res.json({ msg: 'hello-world' });
   })
-  .post((req, res, next) => {});
+  .post(loginCheck, order_ctrl.createOrder);
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(loginCheck, (req, res, next) => {})
   .patch((req, res, next) => {});
 
