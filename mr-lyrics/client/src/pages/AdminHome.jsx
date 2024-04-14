@@ -15,13 +15,13 @@ const AdminHome = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin/contacts">
+                <NavLink to="/admin/adminhindisong">
                   <FaAddressBook />
                   Hindi Songs
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin/service">
+                <NavLink to="/admin/adminenglishsong">
                   <FaRegListAlt />
                   English Songs
                 </NavLink>

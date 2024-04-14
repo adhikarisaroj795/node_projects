@@ -7,6 +7,8 @@ import Hindisong from "./pages/Hindisong";
 import Englishsong from "./pages/Englishsong";
 import AdminHome from "./pages/AdminHome";
 import AdminNepaliSong from "./pages/AdminNepaliSong";
+import AdminEnglishSongAdd from "./pages/AdminEnglishSongAdd";
+import AdminHindiSongAdd from "./pages/AdminHindiSongAdd";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
           <Route path="/englishsongs" element={<Englishsong />} />
           <Route path="/admin" element={<AdminHome />}>
             <Route path="adminnepalisong" element={<AdminNepaliSong />} />
+            <Route path="adminenglishsong" element={<AdminEnglishSongAdd />} />
+            <Route path="adminhindisong" element={<AdminHindiSongAdd />} />
           </Route>
         </Routes>
         <Footer />
