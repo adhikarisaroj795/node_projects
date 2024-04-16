@@ -12,11 +12,17 @@ module.exports = (err, req, res, next) => {
     });
   } else if (process.env.NODE_ENV === "PRODUCTION") {
     let error = { ...err };
-    if (error.name === "CastError") {
-      error = new ErrorHandler(
-        `Resources not found. Invalid ${error.path}`,
-        404
-      );
+
+    error.message = err.message;
+    //* Wrong mongoose object id error
+    if (err.name === "CastError") {
+      const message = `Resources not found invalid: ${err.path}`;
+      error = new ErrorHandler(message, 400);
+    }
+    //* Handling mongoose validation error
+    if (err.name === "ValidationError") {
+      const message = Object.values(err.errors).map((value) => value.message);
+      error = new ErrorHandler(message, 400);
     }
 
     res.status(error.statusCode || 500).json({
