@@ -8,9 +8,12 @@ class ProductController {
   constructor() {
     this.prod_svc = new ProductService();
   }
+
   //* Add products to the database
   addNewProduct = catchAsyncError(async (req, res, next) => {
     let data = req.body;
+    req.body.user = req.user.id;
+
     let product = await this.prod_svc.createNewProduct(data);
     if (product) {
       res.status(201).json({
@@ -28,6 +31,7 @@ class ProductController {
       // const keyword = req.query?.keyword || ""; // If req.query or req.query.keyword is undefined, set keyword to an empty string
       // console.log(keyword);
 
+      console.log("hello 2");
       let products = await this.prod_svc.getAllProducts(req.query);
       const productCount = await productModel.countDocuments();
       res.status(200).json({

@@ -1,5 +1,5 @@
 const userModel = require("../models/user.model");
-const ErrorHandler = require("../middlewares/error.middleware");
+const ErrorHandler = require("../utils/error.handler");
 class UserService {
   registerUser = async (name, email, password) => {
     console.log(name, email, password);
@@ -18,6 +18,17 @@ class UserService {
       return user;
     } catch (error) {
       console.log(error.message);
+    }
+  };
+  loginUser = async (email, password) => {
+    try {
+      const user = await userModel
+        .findOne({ email: email })
+        .select("+password");
+
+      return user;
+    } catch (error) {
+      console.log("error from login");
     }
   };
 }
