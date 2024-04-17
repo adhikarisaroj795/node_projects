@@ -78,6 +78,23 @@ class UserController {
       return next(new ErrorHandler(error.message, 500));
     }
   });
+
+  //reset Password => /api/v1/reset/:token
+  resetPassword = catchAsyncError(async (req, res, next) => {
+    //hash URL token
+    const user = await this.usr_svc.resetPassword(req.params.token, next);
+
+    if (req.body.password !== req.body.confirmPassword) {
+      return next(new ErrorHandler("password does  not match", 400));
+    }
+    //setup new password
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    sendToken(user, 200, res);
+  });
+
   //logout user => /api/v1/logout
   logOut = catchAsyncError(async (req, res, next) => {
     res.cookie("token", null, {

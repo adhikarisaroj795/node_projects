@@ -8,6 +8,7 @@ router.route("/login").post(usr_ctrl.loginUSer);
 router.route("/logout").get(usr_ctrl.logOut);
 
 router.route("/password/forget").post(usr_ctrl.forgetPassword);
+router.route("/password/reset/:token").put(usr_ctrl.resetPassword);
 router.route("/auth/:id").post().get();
 
 module.exports = router;
