@@ -1,6 +1,8 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const orderModel = require("../models/order.model");
+const productModel = require("../models/product.model");
 const OrderService = require("../services/order.service");
+const ErrorHandler = require("../utils/error.handler");
 class OrderController {
   constructor() {
     this.odr_svc = new OrderService();
@@ -80,6 +82,44 @@ class OrderController {
       totalAmount: totalAmount,
       orderCount: order.length,
       order: order,
+    });
+  });
+  //update / process ordr /api/v1/auth/admin/order/:id
+  updateOrderProcess = catchAsyncErrors(async (req, res, next) => {
+    const id = req.params.id;
+    const order = await orderModel.findById(id);
+
+    if (order.orderStatus === "Delivered") {
+      throw new ErrorHandler("You have already delivered this product", 400);
+    }
+
+    for (const item of order.orderItems) {
+      await this.updateStock(item.product, item.quantity);
+    }
+
+    order.orderStatus = req.body.status;
+    order.deliveredAt = Date.now();
+    await order.save();
+    res.status(200).json({
+      sucess: true,
+    });
+  });
+  async updateStock(id, quantity) {
+    const product = await productModel.findById(id);
+    product.stock = product.stock - quantity;
+    await product.save({ validateBeforeSave: false });
+  }
+  //Delete order => /api/v1/auth/admin/order/:id
+  deleteOrder = catchAsyncErrors(async (req, res, next) => {
+    const order = await orderModel.findByIdAndDelete(req.params.id);
+
+    if (!order) {
+      return next(new ErrorHandler("No order found", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      order,
     });
   });
 }

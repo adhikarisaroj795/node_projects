@@ -21,5 +21,21 @@ class OrderService {
   getAllOrder = async () => {
     return await orderModel.find();
   };
+  //   updateOrderProcess = async (id, next) => {
+  //     try {
+  //       const order = await orderModel.findById(id);
+  //       console.log(order);
+
+  //       if (order.orderStatus === "Delivered") {
+  //         throw new ErrorHandler("You have already delivered this product", 400);
+  //       }
+
+  //       for (const item of order.orderItems) {
+  //         await this.updateStock(item.product, item.quantity);
+  //       }
+  //     } catch (error) {
+  //       next(error); // Pass the error to the error handling middleware
+  //     }
+  //   };
 }
 module.exports = OrderService;
