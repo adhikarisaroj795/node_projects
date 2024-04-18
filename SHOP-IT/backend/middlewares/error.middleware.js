@@ -4,47 +4,43 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
 
   if (process.env.NODE_ENV === "DEVELOPMENT") {
+    // Handle errors in development environment
     res.status(err.statusCode).json({
-      sucess: false,
+      success: false,
       error: err,
-      errMessage: err.message,
-      stack: err.stack,
+      errorMessage: err.message,
+      stackTrace: err.stack,
     });
   } else if (process.env.NODE_ENV === "PRODUCTION") {
-    let error = { ...err };
+    // Handle errors in production environment
+    let errorToSend = { ...err };
 
-    error.message = err.message;
-    //* Wrong mongoose object id error
+    // Handling specific error types
     if (err.name === "CastError") {
-      const message = `Resources not found invalid: ${err.path}`;
-      error = new ErrorHandler(message, 400);
-    }
-    //* Handling mongoose validation error
-    if (err.name === "ValidationError") {
-      const message = Object.values(err.errors).map((value) => value.message);
-      error = new ErrorHandler(message, 400);
-    }
-
-    // Handling mongoose dublicate errot
-    if (err.code === 11000) {
-      const message = `Duplicate ${Object.keys(err.keyvalue)} entered`;
-      error = new ErrorHandler(message, 400);
-    }
-
-    // Handling wrong JWT error
-    if (err.name === "JsonWebTokenError") {
-      const message = "json web token is invalid, try again";
-      error = new ErrorHandler(message, 400);
-    }
-    //handle expire token
-    if (err.name === "TokenExpiredError") {
-      const message = "json web token is expired, try again";
-      error = new ErrorHandler(message, 400);
+      errorToSend.message = `Resource not found: Invalid ${err.path}`;
+      errorToSend = new ErrorHandler(errorToSend.message, 400);
+    } else if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((value) => value.message);
+      errorToSend.message = messages;
+      errorToSend = new ErrorHandler(messages, 400);
+    } else if (err.code === 11000) {
+      const field = Object.keys(err.keyValue)[0];
+      const value = err.keyValue[field];
+      errorToSend.message = `Duplicate field value: ${value}. Please use another value.`;
+      errorToSend = new ErrorHandler(errorToSend.message, 400);
+    } else if (err.name === "JsonWebTokenError") {
+      errorToSend.message =
+        "Invalid JSON Web Token. Please provide a valid token.";
+      errorToSend = new ErrorHandler(errorToSend.message, 400);
+    } else if (err.name === "TokenExpiredError") {
+      errorToSend.message = "JSON Web Token has expired. Please log in again.";
+      errorToSend = new ErrorHandler(errorToSend.message, 400);
     }
 
-    res.status(error.statusCode || 500).json({
-      sucess: false,
-      message: error.message || "Internal server Error",
+    // Sending error response
+    res.status(errorToSend.statusCode).json({
+      success: false,
+      message: errorToSend.message || "Internal Server Error",
     });
   }
 };

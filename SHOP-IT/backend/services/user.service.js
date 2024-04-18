@@ -56,5 +56,32 @@ class UserService {
       next(new ErrorHandler("error in reset", 500));
     }
   };
+  upDatePassword = async (req, next) => {
+    try {
+      const user = await userModel.findById(req.user.id).select("+password");
+
+      //check prev password
+      const isMatched = await user.comparePassword(req.body.oldpassword);
+      if (!isMatched) {
+        return next(new ErrorHandler("old password is incorrect", 400));
+      }
+      user.password = req.body.password;
+      return await user.save();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  updateProfile = async (req, next, data) => {
+    try {
+      const user = await userModel.findByIdAndUpdate(req.user.id, data, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      });
+      return user;
+    } catch (error) {
+      next(new ErrorHandler("eror in update profile", 500));
+    }
+  };
 }
 module.exports = UserService;

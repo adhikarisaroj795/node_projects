@@ -95,6 +95,38 @@ class UserController {
     sendToken(user, 200, res);
   });
 
+  // Get currently logged in user detail => /api/v1/me
+  getUserProfile = catchAsyncError(async (req, res, next) => {
+    const user = await userModel.findById(req.user.id);
+
+    res.status(200).json({
+      status: true,
+      user: user,
+    });
+  });
+
+  // Update current / change pws loggedin user  => api/v1/auth/password/update
+  updatePassword = catchAsyncError(async (req, res, next) => {
+    const user = await this.usr_svc.upDatePassword(req, next);
+
+    sendToken(user, 200, res);
+  });
+  //Update user profile => api/v1/auth/me /update
+
+  updateProfile = catchAsyncError(async (req, res, next) => {
+    const newUserData = {
+      name: req.body.name,
+      email: req.body.email,
+    };
+
+    //! update avtar: TODO
+    const user = await this.usr_svc.updateProfile(req, next, newUserData);
+    res.status(200).json({
+      sucess: true,
+      user: user,
+    });
+  });
+
   //logout user => /api/v1/logout
   logOut = catchAsyncError(async (req, res, next) => {
     res.cookie("token", null, {
