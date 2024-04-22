@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -15,17 +16,37 @@ const Register = () => {
   });
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (handleValidation()) {
-      console.log("inside validatoion");
-      const { password, confirmPassword, username, email } = values;
-      const { data } = await axios.post(registerRoute, {
-        username,
-        email,
-        password,
-      });
-      console.log(data);
-      alert("all done");
+    try {
+      event.preventDefault();
+      if (handleValidation()) {
+        const { password, username, email } = values;
+        const response = await axios.post(
+          registerRoute,
+          {
+            username,
+            email,
+            password,
+          },
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = response.data;
+
+        console.log("res", response);
+        if (data.success === false) {
+          toast.error(data.error.message);
+        }
+        if (data.success === true) {
+          localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        }
+        // navigate("/");
+      }
+    } catch (error) {
+      console.log("error", error);
     }
   };
   const handleValidation = () => {
