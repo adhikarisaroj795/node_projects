@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,10 +14,15 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      event.preventDefault();
       if (handleValidation()) {
         const { password, username, email } = values;
         const response = await axios.post(
@@ -28,25 +33,25 @@ const Register = () => {
             password,
           },
           {
-            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
           }
         );
         const data = response.data;
-
-        console.log("res", response);
-        if (data.success === false) {
-          toast.error(data.error.message);
-        }
         if (data.success === true) {
+          toast.success(data.message);
           localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         }
         // navigate("/");
       }
     } catch (error) {
-      console.log("error", error);
+      if (error.response) {
+        const errMessage = error.response.data.error.message;
+        toast.error(errMessage);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
   const handleValidation = () => {
