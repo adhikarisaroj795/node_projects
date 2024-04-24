@@ -48,19 +48,28 @@ class UserService {
   login = async (username, password, next) => {
     try {
       const user = await userModel.findOne({ username: username });
-      console.log(user);
+
       return user;
     } catch (error) {
       console.log(error);
       throw error;
     }
   };
-  userData = async (id, img) => {
-    const userData = await userModel.findByIdAndUpdate(id, {
-      isAvtarImageSet: true,
-      img,
-    });
-    return userData;
+
+  getUsers = async (id) => {
+    try {
+      const users = await userModel
+        .find({ _id: { $ne: id } })
+        .select(["email", "username", "avtarImage", "_id"]);
+      if (!users) {
+        const error = new Error("no user found");
+        error.statusCode = 404;
+        throw error;
+      }
+      return users;
+    } catch (error) {
+      throw error;
+    }
   };
 }
 

@@ -13,22 +13,42 @@ const SetAvtar = () => {
   const [isLoading, setIsloading] = useState(true);
   const [selectedAvtar, setSelectedAvtar] = useState(undefined);
 
+  useEffect(() => {
+    if (!localStorage.getItem("chat-app-user")) {
+      navigate("/login");
+    }
+  }, []);
   const setProfilePicture = async () => {
-    if (selectedAvtar === undefined) {
-      toast.error("Please select an avtar");
-    } else {
-      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-      const { data } = await axios.post(`${setAvtarRoute}/${user._id}`, {
-        image: avtars[selectedAvtar],
-      });
-      if (data.isSet) {
-        user.isAvatarImageSet = true;
-        user.avatarImage = data.image;
-        localStorage.setItem("chat-app-user", JSON.stringify(user));
-        navigate("/");
+    try {
+      if (selectedAvtar === undefined) {
+        toast.error("Please select an avtar");
       } else {
-        toast.error("Error setting avatar please try again");
+        const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+
+        const response = await axios.post(
+          `${setAvtarRoute}/${user._id}`,
+          {
+            image: avtars[selectedAvtar],
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = response.data;
+        if (data.isSet) {
+          user.isAvatarImageSet = true;
+          user.avatarImage = data.image;
+          localStorage.setItem("chat-app-user", JSON.stringify(user));
+          navigate("/");
+        } else {
+          toast.error("Error setting avatar please try again");
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 

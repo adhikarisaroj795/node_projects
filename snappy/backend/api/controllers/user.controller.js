@@ -1,3 +1,5 @@
+const { use } = require("../../routes");
+const userModel = require("../model/user.model");
 const UserService = require("../service/user.service");
 const ErrorHandler = require("../utils/error.handler");
 class UserController {
@@ -47,11 +49,43 @@ class UserController {
     try {
       const userId = req.params.id;
       const avatarImage = req.body.image;
-      const userData = await this.usr_svc.userData(userId, avatarImage);
-      console.log(userData);
+
+      // Validate userId and avatarImage
+      if (!userId || !avatarImage) {
+        return res.status(400).json({ error: "Missing userId or avatarImage" });
+      }
+
+      const userData = await userModel.findByIdAndUpdate(
+        userId,
+        {
+          isAvtarImageSet: true,
+          avtarImage: avatarImage,
+        },
+        {
+          new: true,
+        }
+      );
+
+      if (!userData) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
       res.status(200).json({
         isSet: userData.isAvtarImageSet,
-        image: userData.avatarImage,
+        image: userData.avtarImage,
+      });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  };
+  getallUsers = async (req, res, next) => {
+    try {
+      const user = await this.usr_svc.getUsers(req.params.id);
+      res.status(200).json({
+        success: true,
+        users: user,
+        message: "users fetched sucess",
       });
     } catch (error) {
       next(error);

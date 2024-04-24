@@ -5,6 +5,7 @@ const usr_ctrl = new UserController();
 
 router.route("/register").post(usr_ctrl.register);
 router.route("/login").post(usr_ctrl.login);
-router.route("/setAvatar/:id").post(usr_ctrl.login);
+router.route("/setAvatar/:id").post(usr_ctrl.setAvatar);
+router.route("/allUsers/:id").get(usr_ctrl.getallUsers);
 
 module.exports = router;
