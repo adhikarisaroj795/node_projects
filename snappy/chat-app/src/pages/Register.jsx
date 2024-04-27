@@ -43,7 +43,7 @@ const Register = () => {
           toast.success(data.message);
           localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         }
-        // navigate("/");
+        navigate("/setAvtar");
       }
     } catch (error) {
       if (error.response) {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { IoMdSend } from "react-icons/io";
 import { BsEmojiSmileFill } from "react-icons/bs";
 
-const ChatInput = () => {
+const ChatInput = ({ handleSendMsg }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -16,6 +16,13 @@ const ChatInput = () => {
     message += emojiData.emoji;
     setMsg(message);
   };
+  const sendChat = (event) => {
+    event.preventDefault();
+    if (msg.length > 0) {
+      handleSendMsg(msg);
+      setMsg("");
+    }
+  };
 
   return (
     <>
@@ -26,7 +33,7 @@ const ChatInput = () => {
             {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
           </div>
         </div>
-        <form className="input-container">
+        <form className="input-container" onSubmit={(e) => sendChat(e)}>
           <input
             type="text"
             placeholder="type your message here"
@@ -49,6 +56,9 @@ const Container = styled.div`
   background-color: #080420;
   padding: 0 2rem;
   padding-bottom: 0.3rem;
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    padding: 0 1rem;
+  }
   .button-container {
     display: flex;
     align-items: center;
@@ -123,6 +133,12 @@ const Container = styled.div`
       align-items: center;
       background-color: #9186f3;
       border: none;
+      @media screen and (min-width: 720px) and (max-width: 1080px) {
+        padding: 0.3rem 1rem;
+        svg {
+          font-size: 1rem;
+        }
+      }
       svg {
         font-size: 2rem;
         color: white;

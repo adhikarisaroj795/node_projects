@@ -43,6 +43,7 @@ const Login = () => {
             JSON.stringify(response.data.user)
           );
           toast.success(response.data.msg);
+          navigate("/chat");
         }
       }
     } catch (error) {
@@ -102,7 +103,7 @@ const Login = () => {
           />
           <button type="submit">Login In</button>
           <span>
-            Don't have an account ? <Link to="/login">Register</Link>
+            Don't have an account ? <Link to="/register">Register</Link>
           </span>
         </form>
       </FormContainer>
