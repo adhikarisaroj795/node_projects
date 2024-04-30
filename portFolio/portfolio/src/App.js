@@ -2,12 +2,20 @@ import React from "react";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import "./App.css";
+import About from "./components/about/About";
+import Skills from "./components/skills/Skills";
+import Services from "./components/services/Services";
 
 const App = () => {
   return (
     <>
       <Header />
-      <Home />
+      <main className="main">
+        <Home />
+        <About />
+        <Skills />
+        <Services />
+      </main>
     </>
   );
 };
