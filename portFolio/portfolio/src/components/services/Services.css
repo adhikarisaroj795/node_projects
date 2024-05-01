@@ -37,8 +37,7 @@
 }
 
 .services__modal {
-  display: none;
-  /* position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -49,9 +48,9 @@
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
-  opacity: 1;
-  visibility: visible;
-  transition: 0.3s; */
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
 }
 
 .services__modal-content {
@@ -99,4 +98,53 @@
 .services__modal_icon {
   color: var(--title-color);
   font-size: 1.1rem;
+}
+.services__modal-info {
+  font-size: var(--small-font-size);
+}
+
+/*Active modal*/
+.active-modal {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*-============ BREAKPOINTS ============*/
+/*---------------FOR LARGE DEVICES---------------*/
+@media screen and (max-width: 992px) {
+  .services__container {
+    grid-template-columns: repeat(3, 218px);
+  }
+}
+
+/*---------------FOR Medium DEVICES---------------*/
+@media screen and (max-width: 768px) {
+  .services__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .services__content {
+    padding: 3.5rem 0.5rem 1.25rem 1.5rem;
+  }
+  .services__icon {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .services__modal-content {
+    padding: 4.5rem 1.5rem 2.5rem;
+  }
+  .services_modal-description {
+    padding: 0;
+  }
+}
+
+/*For Small Devices*/
+@media screen and (max-width: 350px) {
+  .services__container {
+    grid-template-columns: max-content;
+  }
+  .services__content {
+    padding-right: 6rem;
+  }
 }

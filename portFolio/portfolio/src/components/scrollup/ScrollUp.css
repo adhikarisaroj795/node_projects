@@ -1,0 +1,67 @@
+/* Base styles for the scroll-up button */
+.scrollup {
+  position: fixed;
+  right: 20px; /* Adjust the distance from the right edge of the viewport */
+  bottom: 70px; /* Adjust the distance from the bottom edge of the viewport */
+  background-color: var(--title-color); /* Dark background for contrast */
+  color: #fff; /* Light text color for contrast */
+  padding: 8px 13px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  z-index: 1000; /* Ensure it's above other content */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+/* Show the scroll-up button when scrolling down */
+.scrollup.show-scroll {
+  opacity: 0.6; /* Make the button visible */
+}
+
+/* Hover effect for the button */
+.scrollup:hover {
+  background-color: var(
+    --title-color
+  ); /* Slightly darker background on hover */
+}
+
+/* Icon styles */
+.scrollup__icon {
+  font-size: 24px; /* Adjust the icon size */
+  margin-right: 5px; /* Space between the icon and the text */
+}
+
+/* Text styles */
+.scrollup__icon + saroj {
+  font-size: 14px; /* Adjust the text size */
+  margin: 0; /* Remove default margin */
+}
+
+/*-============ BREAKPOINTS ============*/
+/*---------------FOR LARGE DEVICES---------------*/
+@media screen and (max-width: 992px) {
+  .scrollup {
+    right: 1.5rem;
+    padding: 0.25rem 0.4rem;
+  }
+  .scrollup__icon {
+    font-size: 1.25rem;
+  }
+}
+
+/*---------------FOR Medium DEVICES---------------*/
+@media screen and (max-width: 768px) {
+  .show-scroll {
+    bottom: 4rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+}
+
+/*For Small Devices*/
+@media screen and (max-width: 350px) {
+  .scrollup {
+    right: 1rem;
+  }
+}
