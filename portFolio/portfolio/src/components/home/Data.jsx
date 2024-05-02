@@ -63,7 +63,7 @@ const Data = () => {
         in building scalable web solutions that deliver seamless user
         experiences.
       </p>
-      <a href="#contact" className="button button--flex">
+      <a href="#contact" rel="noreferrer" className="button button--flex">
         Say Hello
         <svg
           class="button__icon"

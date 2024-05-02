@@ -8,20 +8,20 @@ const Footer = () => {
         <h1 className="footer__title">Saroj</h1>
         <ul className="footer__list">
           <li>
-            <a href="#about" className="footer__link">
+            <a href="#about" rel="noreferrer" className="footer__link">
               About
             </a>
           </li>
           <li>
-            <a href="#" className="footer__link"></a>
+            <a href="#" rel="noreferrer" className="footer__link"></a>
           </li>
           <li>
-            <a href="#portfolio" className="footer__link">
+            <a href="#portfolio" rel="noreferrer" className="footer__link">
               Projects
             </a>
           </li>
           <li>
-            <a href="#testimonials" className="footer__link">
+            <a href="#testimonials" rel="noreferrer" className="footer__link">
               Testimonials
             </a>
           </li>
