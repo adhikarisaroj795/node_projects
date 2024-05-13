@@ -5,7 +5,7 @@ const ContactSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter Your Full name"],
     minlength: [3, "Your name must be atleast 4 characters"],
-    maxlength: [20, "Your name cannot exceed 20 characters"],
+    maxlength: [50, "Your name cannot exceed 20 characters"],
   },
   email: {
     type: String,

@@ -1,0 +1,64 @@
+.registration-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-color: red; */
+}
+.registration-page {
+  background-color: #f3f3f3;
+  border-radius: 2rem;
+  padding: 4rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 100%; */
+  /* border: 2px solid red; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.registration-page form {
+  justify-content: center;
+  align-items: center;
+}
+.registration-page h2 {
+  color: #333;
+  padding-bottom: var(--mb-3);
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.reg-btn {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--mb-1);
+}
+.reg-btn button {
+  display: inline-block;
+  background-color: #60807f;
+  /* background-color: #ffe492; */
+  /* background-color: var(--title-color); */
+  color: var(--container-color);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: var(--font-medium);
+}
+.already-account {
+  text-align: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
