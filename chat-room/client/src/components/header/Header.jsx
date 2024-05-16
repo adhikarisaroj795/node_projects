@@ -36,10 +36,10 @@ const Header = () => {
           <ul className="nav__list">
             <li className="nav__item grid">
               <NavLink
-                to="/home"
+                to="/"
                 onClick={() => handleSetActiveNav("/home")}
                 className={
-                  activeNav === "/home" ? "nav__link active-link" : "nav__link"
+                  activeNav === "/" ? "nav__link active-link" : "nav__link"
                 }
               >
                 <i className="uil uil-estate nav__icon"></i>

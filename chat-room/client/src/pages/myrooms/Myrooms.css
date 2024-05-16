@@ -1,0 +1,66 @@
+.my-room-sec-holder {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  margin-top: 4rem;
+  /* background-color: red; */
+  height: 100vh;
+  overflow-y: auto; /* vertical scrollbar */
+  max-height: 411px;
+}
+
+.availabe-room-chat-area {
+  overflow-y: auto; /* vertical scrollbar */
+
+  flex: 1;
+}
+.room-available-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  background-color: #d0cdcd;
+
+  flex: 0 0 25%;
+  padding: 20px;
+}
+.available-room {
+  background: #fff;
+  border-radius: 5px;
+  border: var(--btn-border);
+}
+.room-card {
+  padding: 10px;
+}
+.msg-heading {
+  padding: 10px;
+}
+.chatarea {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.input-msg-area {
+  padding: 0px 15px 15px 15px;
+  /* background-color: aqua; */
+  display: flex;
+  margin-top: auto;
+  flex: 0 0 20%;
+}
+.input-msg-area input {
+  padding: 20px;
+  flex: 1;
+  border-radius: 5px;
+  border: var(--btn-border);
+}
+
+.message-area {
+  /* background-color: antiquewhite; */
+  flex: 0 0 80%;
+  /* border: var(--btn-border); */
+}
+.display-msg-area {
+  padding: 10px;
+}

@@ -7,7 +7,7 @@
 
   --hue: 0;
   --sat: 0%;
-
+  --btn-border: 2px solid rgb(119, 229, 128);
   --title-color: hsl(var(--hue), var(--sat), 20%);
   --title-color-dark: hsl(var(--hue), var(--sat), 0%);
   --text-color: hsl(var(--hue), var(--sat), 46%);
