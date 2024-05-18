@@ -6,6 +6,8 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import MyRooms from "./pages/myrooms/MyRooms";
+import DirectMsg from "./pages/directMsg/DirectMsg";
+import RandomMsg from "./pages/random/Random";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="/" element={<Home />} />
         <Route path="/myrooms" element={<MyRooms />} />
+        <Route path="/directmessage" element={<DirectMsg />} />
+        <Route path="/random" element={<RandomMsg />} />
       </Routes>
     </BrowserRouter>
   );

@@ -23,6 +23,48 @@ const MyRooms = () => {
       roomid: "#v90ty",
       roomname: "jot-ko-room5",
     },
+    {
+      roomid: "bikal",
+      roomname: "bikalsapit",
+    },
+  ];
+  const message = [
+    {
+      incomming:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, veniam?",
+      outgoing:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, veniam?",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+      outgoing: "Lorem ipsum dolor sit amet ",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
+      outgoing: "Lorem ipsum dolor sit amet consectetur ",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur ",
+      outgoing: "Lorem ipsum dolor sit amet consectetur ",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+      outgoing: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+      outgoing: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+    },
+    {
+      incomming: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+      outgoing: "Lorem ipsum dolor sit amet consectetur adipisicing ",
+    },
+    {
+      incomming:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, veniam?",
+      outgoing:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, veniam?",
+    },
   ];
   return (
     <section className="section ">
@@ -48,16 +90,23 @@ const MyRooms = () => {
                   <div className="msg-heading">
                     <span>#78skjf</span>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ducimus, voluptatem est adipisci quae atque dolore
-                    reprehenderit! Non cum consequuntur aut expedita aliquam
-                    delectus quibusdam accusamus sed aliquid culpa, at nemo?
-                  </p>
+                  <div className="actual-msg">
+                    {message.map((msg, index) => (
+                      <>
+                        <div className="message outgoing">
+                          <p>{msg.outgoing}</p>
+                        </div>
+                        <div className="message incomming">
+                          <p>{msg.incomming}</p>
+                        </div>
+                      </>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="input-msg-area">
                 <input type="text" />
+                <button className="send-btn">send</button>
               </div>
             </div>
           </div>
