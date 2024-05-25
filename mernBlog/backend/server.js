@@ -1,9 +1,11 @@
+const connectDb = require("./API/Utils/db.config");
 const app = require("./app");
 
 app.get("/test", (req, res) => {
   res.json("test passed");
 });
 
+connectDb();
 app.listen(process.env.PORT, (err) => {
   if (err) {
     console.error(err);
