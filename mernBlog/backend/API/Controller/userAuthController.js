@@ -30,6 +30,8 @@ class UserAuth {
 
   login = async (req, res, next) => {
     try {
+      const { token } = req.cookies;
+      console.log(token);
       const { email, password } = req.body;
 
       if (!email || !password) {

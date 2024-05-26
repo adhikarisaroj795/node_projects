@@ -4,7 +4,7 @@ const ErrorHandler = require("../Utils/error.handler");
 
 const isAuthenticated = async (req, res, next) => {
   const { token } = req.cookies;
-  console.log("token", token);
+  console.log("from auth", token);
   if (!token) {
     return next(new ErrorHandler("Login first to access this", 401));
   }
