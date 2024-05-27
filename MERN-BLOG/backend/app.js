@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const routes = require("./API/Routes/index");
+const errorMiddleware = require("./API/middleware/error.middleware");
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(routes);
+app.use(errorMiddleware);
 
 module.exports = app;

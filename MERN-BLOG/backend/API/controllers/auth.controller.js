@@ -1,4 +1,5 @@
 const AuthService = require("../services/authService");
+const ErrorHandler = require("../utils/error.handler");
 class AuthController {
   constructor() {
     this.auth_svc = new AuthService();
@@ -14,10 +15,8 @@ class AuthController {
         email === "" ||
         password === ""
       ) {
-        return res.status(400).json({
-          status: false,
-          message: "All field are required",
-        });
+        return next(new ErrorHandler("All fieldsrequired", 400));
+        // throw new ErrorHandler("All fieldsrequired", 400);
       }
 
       const newUser = await this.auth_svc.SignUp(username, email, password);
@@ -27,7 +26,9 @@ class AuthController {
         user: newUser,
         msg: "user created success",
       });
-    } catch (error) {}
+    } catch (error) {
+      next(error);
+    }
   };
 }
 

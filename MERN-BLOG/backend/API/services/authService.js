@@ -1,9 +1,13 @@
 const userModel = require("../models/user.model");
+const ErrorHandler = require("../utils/error.handler");
 
 class AuthService {
   SignUp = async (username, email, password) => {
     try {
-      const isEmailMatched = await userModel.findOne({ email: email });
+      const existingEmail = await userModel.findOne({ email: email });
+      if (existingEmail) {
+        throw new ErrorHandler("Email already Exist", 409);
+      }
 
       const newUser = new userModel({
         username,
