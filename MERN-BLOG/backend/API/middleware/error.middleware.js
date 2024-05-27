@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === "DEVELOPMENT") {
     // Handle errors in development environment
     res.status(err.statusCode).json({
-      success: false,
+      status: false,
       error: err,
       errorMessage: err.message,
       stackTrace: err.stack,
@@ -43,7 +43,7 @@ module.exports = (err, req, res, next) => {
 
     // Sending error response
     res.status(errorToSend.statusCode).json({
-      success: false,
+      status: false,
       message: err.message || "Internal Server Error",
     });
   }
