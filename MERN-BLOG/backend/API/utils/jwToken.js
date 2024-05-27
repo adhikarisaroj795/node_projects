@@ -12,10 +12,12 @@ const sendToken = (user, statusCode, res, message) => {
     secure: true,
   };
 
-  res.status(statusCode).cookie("token", token, options).json({
+  const { password, ...rest } = user._doc;
+
+  res.status(statusCode).cookie("access_token", token, options).json({
     status: true,
     token,
-    user,
+    user: rest,
     message: message,
   });
 };

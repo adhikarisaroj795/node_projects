@@ -1,5 +1,6 @@
 const AuthService = require("../services/authService");
 const ErrorHandler = require("../utils/error.handler");
+const sendToken = require("../utils/jwToken");
 class AuthController {
   constructor() {
     this.auth_svc = new AuthService();
@@ -26,6 +27,21 @@ class AuthController {
         user: newUser,
         msg: "user created success",
       });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  signIn = async (req, res, next) => {
+    const { email, password } = req.body;
+    if (!email || !password || email === "" || password === "") {
+      return next(new ErrorHandler("All field are required", 400));
+    }
+    try {
+      const user = await this.auth_svc.SignIn(email, password);
+
+      const message = "User LoggedIn success";
+      sendToken(user, 200, res, message);
     } catch (error) {
       next(error);
     }
