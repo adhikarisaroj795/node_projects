@@ -1,5 +1,7 @@
 const userModel = require("../models/user.model");
 const ErrorHandler = require("../utils/error.handler");
+const sendToken = require("../utils/jwToken");
+const bcryptjs = require("bcryptjs");
 
 class AuthService {
   SignUp = async (username, email, password) => {
@@ -26,7 +28,7 @@ class AuthService {
         email: email,
       });
       if (!ExistingUser) {
-        throw new ErrorHandler("No username found", 404);
+        throw new ErrorHandler("Invalid credentials", 404);
       }
 
       const isPasswordMatched = await ExistingUser.comparePassword(password);
@@ -34,6 +36,32 @@ class AuthService {
         throw new ErrorHandler("Invalid credentials", 401);
       }
       return ExistingUser;
+    } catch (error) {
+      throw error;
+    }
+  };
+  GoogleService = async (email, name, res, googlePhotoUrl) => {
+    try {
+      const user = await userModel.findOne({ email: email });
+      if (user) {
+        const message = "Logged in Success";
+        sendToken(user, 200, res, message);
+      } else {
+        const generatedPassword =
+          Math.random().toString(36).slice(-8) +
+          Math.random().toString(36).slice(-8);
+        const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+        const newUser = new userModel({
+          username:
+            name.toLowerCase().split(" ").join("") +
+            Math.random().toString(9).slice(-4),
+          email,
+          password: hashedPassword,
+          profilePicture: googlePhotoUrl,
+        });
+        await newUser.save();
+        return newUser;
+      }
     } catch (error) {
       throw error;
     }

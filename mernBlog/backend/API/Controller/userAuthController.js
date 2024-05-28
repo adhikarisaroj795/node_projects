@@ -52,7 +52,7 @@ class UserAuth {
       console.log(user);
       res.status(200).json({
         success: true,
-        user: user,
+        user: user,   
       });
     } catch (error) {
       console.error(error);
