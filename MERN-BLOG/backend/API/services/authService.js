@@ -53,12 +53,13 @@ class AuthService {
         const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
         const newUser = new userModel({
           username:
-            name.toLowerCase().split(" ").join("") +
+            name.toLowerCase().replace(/\s+/g, "").substring(0, 15) +
             Math.random().toString(9).slice(-4),
           email,
           password: hashedPassword,
           profilePicture: googlePhotoUrl,
         });
+        console.log("service", newUser);
         await newUser.save();
         return newUser;
       }
