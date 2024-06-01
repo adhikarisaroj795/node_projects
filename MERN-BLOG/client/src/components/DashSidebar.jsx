@@ -1,0 +1,39 @@
+import { Sidebar } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import { HiArrowSmRight, HiUser } from "react-icons/hi";
+import { Link, useLocation } from "react-router-dom";
+
+const DashSidebar = () => {
+  const location = useLocation();
+  const [tab, setTab] = useState("");
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const tabFormUrl = urlParams.get("tab");
+    if (tabFormUrl) {
+      setTab(tabFormUrl);
+    }
+  }, [location.search]);
+  return (
+    <Sidebar className="w-full">
+      <Sidebar.Items>
+        <Sidebar.ItemGroup>
+          <Link to="/dashboard?tab=profile">
+            <Sidebar.Item
+              active={tab === "profile"}
+              icon={HiUser}
+              label={"user"}
+              labelColor="dark"
+            >
+              Profile
+            </Sidebar.Item>
+          </Link>
+          <Sidebar.Item icon={HiArrowSmRight} className="cursor-pointer">
+            SignOut
+          </Sidebar.Item>
+        </Sidebar.ItemGroup>
+      </Sidebar.Items>
+    </Sidebar>
+  );
+};
+
+export default DashSidebar;

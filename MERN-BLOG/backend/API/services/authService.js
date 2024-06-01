@@ -40,9 +40,10 @@ class AuthService {
       throw error;
     }
   };
-  GoogleService = async (email, name, res, googlePhotoUrl) => {
+  GoogleService = async (email, name, googlePhotoUrl, res) => {
     try {
       const user = await userModel.findOne({ email: email });
+      console.log(email);
       if (user) {
         const message = "Logged in Success";
         sendToken(user, 200, res, message);
@@ -55,7 +56,7 @@ class AuthService {
           username:
             name.toLowerCase().replace(/\s+/g, "").substring(0, 15) +
             Math.random().toString(9).slice(-4),
-          email,
+          email: email,
           password: hashedPassword,
           profilePicture: googlePhotoUrl,
         });

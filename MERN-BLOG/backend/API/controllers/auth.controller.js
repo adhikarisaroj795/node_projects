@@ -48,13 +48,13 @@ class AuthController {
   };
   google = async (req, res, next) => {
     const { email, name, googlePhotoUrl } = req.body;
-    console.log(req.body);
+
     try {
       const user = await this.auth_svc.GoogleService(
-        name,
         email,
-        res,
-        googlePhotoUrl
+        name,
+        googlePhotoUrl,
+        res
       );
       const message = "user created";
       sendToken(user, 201, res, message);
