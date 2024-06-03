@@ -60,7 +60,7 @@ class AuthService {
           password: hashedPassword,
           profilePicture: googlePhotoUrl,
         });
-        console.log("service", newUser);
+
         await newUser.save();
         return newUser;
       }

@@ -4,10 +4,15 @@ class userController {
     this.usr_svc = new userService();
   }
 
-  signUp = (req, res, next) => {};
-  register = (req, res, next) => {
-    console.log("hello from register");
-    res.json("test passed");
+  updateUser = async (req, res, next) => {
+    try {
+      const { token } = req.cookies.access_token;
+      console.log(token);
+
+      console.log(req.user);
+    } catch (error) {
+      next(error);
+    }
   };
 }
 

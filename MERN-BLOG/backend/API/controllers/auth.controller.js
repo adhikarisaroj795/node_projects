@@ -34,6 +34,7 @@ class AuthController {
 
   signIn = async (req, res, next) => {
     const { email, password } = req.body;
+
     if (!email || !password || email === "" || password === "") {
       return next(new ErrorHandler("All field are required", 400));
     }

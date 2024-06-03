@@ -1,0 +1,127 @@
+.nav-logo {
+  height: 100px;
+  border-radius: 10px;
+  width: 200px;
+}
+.nav-logo img {
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
+}
+.nav-logo img:hover {
+  border-radius: 20px;
+}
+header {
+  max-width: 1460px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+}
+nav ul li {
+  margin-left: 40px;
+}
+nav ul li a {
+  color: var(--text-color);
+}
+nav ul li a:hover {
+  color: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(187, 191, 0, 0.1),
+    0 6px 20px rgba(187, 191, 0, 0.1);
+}
+.search-input input {
+  padding: 8px 50px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-color);
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.nav-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  /* background-color: var(--body-color); */
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  position: relative;
+  display: inline-block;
+}
+
+.search-input i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translatey(-50%);
+  pointer-events: none;
+  font-size: 20px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  /* box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1), 4px 0 8px rgba(0, 0, 0, 0.1); */
+  border-bottom: 30px;
+  border: 0.1px solid red;
+}
+.nav-logo:hover {
+  transform: scale(1.2);
+  /* box-shadow: 0 4px 8px rgba(187, 191, 0, 0.1),
+    0 6px 20px rgba(187, 191, 0, 0.1);
+  border-radius: 50%; */
+}
+.nav-logo span {
+  display: inline-block;
+}
+input:focus {
+  border: 1px solid var(--primary-color); /* Change border color when focused */
+}
+
+/* .nav-btn button {
+  margin-left: 20px;
+} */
+
+@media screen and (max-width: 1255px) {
+  .search-input input {
+    padding: 2px 8px;
+  }
+  nav ul li {
+    margin-left: 20px;
+  }
+  .nav-logo {
+    height: 60px;
+
+    width: 140px;
+  }
+  .nav-btn {
+    padding: 5px;
+  }
+  .gbl-btn {
+    padding: 0.2rem 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  header nav ul li {
+    flex-wrap: nowrap;
+  }
+  nav ul li {
+    margin-left: 10px;
+  }
+}
