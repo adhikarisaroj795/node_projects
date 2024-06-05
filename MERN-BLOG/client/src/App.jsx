@@ -6,9 +6,9 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Projects from "./pages/Projects";
 import Header from "./components/Header";
-
 import FooterComp from "./components/Footer";
 import PrivateRoutes from "./components/PrivateRoutes";
+import ComSlider from "./components/ComSlider";
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/slider" element={<ComSlider />} />
       </Routes>
       <FooterComp />
     </BrowserRouter>
