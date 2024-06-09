@@ -1,0 +1,29 @@
+slick-prev,
+.slick-next {
+  color: black !important;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before {
+  opacity: 10;
+  font-size: 20px;
+  color: red;
+}
