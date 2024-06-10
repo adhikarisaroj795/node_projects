@@ -9,3 +9,4 @@ app.use("/api/v1/blogs", blogRoutes);
 app.use("/api/v1/categories", categoriesRoutes);
 
 module.exports = app;
+    
