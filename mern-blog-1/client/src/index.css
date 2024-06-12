@@ -1,0 +1,20 @@
+a {
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.gbl-btn {
+  padding: 10px 20px;
+  border: none;
+  color: yellow;
+  background-color: darkgray;
+  border-radius: 5px;
+}
+
+.gbl-btn:hover {
+  background-color: yellow;
+  color: darkgray;
+}
