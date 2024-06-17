@@ -9,13 +9,14 @@ const sendToken = (user, statusCode, res, message) => {
   const options = {
     expires: expireDate,
     httpOnly: true,
-    sameSite: "None",
+    sameSite: "Lax",
     secure: isProduction,
   };
 
   const { password, ...rest } = user._doc;
+  console.log(token);
 
-  res.status(statusCode).cookie("access_token", token, options).json({
+  res.status(statusCode).cookie("token", token, options).json({
     status: true,
     token,
     user: rest,
