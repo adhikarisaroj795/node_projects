@@ -24,6 +24,9 @@ const DashProfile = () => {
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+  const [updateUserError, setUpdateUserError] = useState(null);
   const [formData, setFormData] = useState({});
 
   const filePickerRef = useRef();
@@ -42,6 +45,8 @@ const DashProfile = () => {
   }, [imageFile]);
 
   const uploadImage = async () => {
+    setImageFileUploading(true);
+    setImageFileUploadError(null);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
     const storageRef = ref(storage, fileName);
@@ -60,11 +65,13 @@ const DashProfile = () => {
         setImageFileUploadProgress(null);
         setImageFile(null);
         setImageFileUrl(null);
+        setImageFileUploading(false);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
           setImageFileUrl(downloadUrl);
           setFormData({ ...formData, profilePicture: downloadUrl });
+          setImageFileUploading(false);
         });
       }
     );
@@ -75,7 +82,14 @@ const DashProfile = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUpdateUserError(null);
+    setUpdateUserSuccess(null);
     if (Object.keys(formData).length === 0) {
+      setUpdateUserError("No changes Made");
+      return;
+    }
+    if (imageFileUploading) {
+      setUpdateUserError("Please Wait For Image To Upload");
       return;
     }
     try {
@@ -91,11 +105,14 @@ const DashProfile = () => {
       const data = await res.json();
       if (data.status === false) {
         dispatch(updateFailure(data.errorMessage));
+        setUpdateUserError(data.errorMessage);
       } else {
         dispatch(updateSuccess(data));
+        setUpdateUserSuccess("user's profile updated successfully");
       }
     } catch (error) {
       dispatch(updateFailure(error.errorMessage));
+      setUpdateUserSuccess("user's profile updated successfully");
     }
   };
   return (
@@ -174,10 +191,20 @@ const DashProfile = () => {
         <span className="cursor-pointer">Delete Account</span>
         <span className="cursor-pointer">Delete Account</span>
       </div>
+      {updateUserSuccess && (
+        <Alert color={"success"} className="mt-5">
+          {updateUserSuccess}
+        </Alert>
+      )}
+      {updateUserError && (
+        <Alert color={"failure"} className="mt-5">
+          {updateUserError}
+        </Alert>
+      )}
     </div>
   );
 };
 
 export default DashProfile;
 
-//5:08:00
+//5:08:007
