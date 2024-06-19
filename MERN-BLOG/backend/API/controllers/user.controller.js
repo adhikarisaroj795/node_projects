@@ -55,6 +55,31 @@ class userController {
       next(error);
     }
   };
+
+  deleteUser = async (req, res, next) => {
+    let paramId = req.params.userId;
+
+    if (paramId.startsWith(":")) {
+      paramId = paramId.substring(1);
+    }
+    console.log(paramId);
+    console.log(req.user.id);
+    if (req.user.id !== paramId) {
+      return next(
+        new ErrorHandler("You are not allowded to delete the account", 404)
+      );
+    }
+    try {
+      const deletedUser = await this.usr_svc.deleteUser(req.params.userId);
+      res.status(200).json({
+        status: true,
+        deletedUser: deletedUser,
+        msg: "User Deleted Success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = userController;

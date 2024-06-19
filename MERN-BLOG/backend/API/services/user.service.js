@@ -24,6 +24,15 @@ class userService {
       throw error;
     }
   };
+
+  deleteUser = async (id) => {
+    try {
+      const deletedUser = await userModel.findByIdAndDelete(id);
+      return deletedUser;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = userService;
