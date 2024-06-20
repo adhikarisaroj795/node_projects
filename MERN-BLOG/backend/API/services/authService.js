@@ -43,7 +43,7 @@ class AuthService {
   GoogleService = async (email, name, googlePhotoUrl, res) => {
     try {
       const user = await userModel.findOne({ email: email });
-      console.log(email);
+
       if (user) {
         const message = "Logged in Success";
         sendToken(user, 200, res, message);
