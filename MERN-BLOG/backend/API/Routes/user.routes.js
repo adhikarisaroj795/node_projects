@@ -9,4 +9,6 @@ router
   .route("/user/delete/:userId")
   .delete(isAuthenticated, usr_ctrl.deleteUser);
 
+router.route("/user/signout").post(usr_ctrl.signOut);
+
 module.exports = router;

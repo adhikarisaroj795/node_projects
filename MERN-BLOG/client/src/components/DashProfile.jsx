@@ -17,8 +17,9 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  signOutSuccess,
 } from "../redux/user/userSlice";
-import { updateUser, deleteUser } from "../utils/APIRoutes";
+import { updateUser, deleteUser, signOutRoute } from "../utils/APIRoutes";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const DashProfile = () => {
@@ -128,6 +129,7 @@ const DashProfile = () => {
       dispatch(deleteUserStart());
       const res = await fetch(`${deleteUser}/${currentUser.user._id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       const data = await res.json();
       if (data.status === false) {
@@ -138,6 +140,22 @@ const DashProfile = () => {
       }
     } catch (error) {
       dispatch(deleteUserFailure(error.errorMessage));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch(signOutRoute, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok || data.status === false) {
+        console.log(data.errorMessage);
+      } else {
+        dispatch(signOutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
   return (
@@ -216,7 +234,9 @@ const DashProfile = () => {
         <span onClick={() => setShowModal(true)} className="cursor-pointer">
           Delete Account
         </span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span onClick={handleSignOut} className="cursor-pointer">
+          Sign Out
+        </span>
       </div>
       {updateUserSuccess && (
         <Alert color={"success"} className="mt-5">
@@ -246,7 +266,7 @@ const DashProfile = () => {
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
               Are you sure you want to delete the account
             </h3>
-            <div>
+            <div className="flex justify-center gap-4">
               <Button color={"failure"} onClick={handleDeleteUser}>
                 Yes, I'm sure
               </Button>
