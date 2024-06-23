@@ -6,3 +6,4 @@ export const googleAuthRoute = `${host}/api/v1/auth/google`;
 export const updateUser = `${host}/api/v1/user/update`;
 export const deleteUser = `${host}/api/v1/user/delete`;
 export const signOutRoute = `${host}/api/v1/user/signout`;
+export const createPostRoute = `${host}/api/v1/admin/createpost`;

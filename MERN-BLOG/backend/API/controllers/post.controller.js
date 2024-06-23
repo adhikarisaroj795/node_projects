@@ -1,4 +1,5 @@
 const post_svc = require("../services/post.service");
+const ErrorHandler = require("../utils/error.handler");
 class PostController {
   static createPost = async (req, res, next) => {
     try {
