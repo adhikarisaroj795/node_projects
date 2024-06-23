@@ -7,4 +7,6 @@ router
   .route("/admin/createpost")
   .post(isAuthenticated, postController.createPost);
 
+router.route("/admin/allposts").get(postController.getPosts);
+
 module.exports = router;

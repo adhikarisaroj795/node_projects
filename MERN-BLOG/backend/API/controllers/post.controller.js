@@ -26,5 +26,22 @@ class PostController {
       next(error);
     }
   };
+
+  static getPosts = async (req, res, next) => {
+    try {
+      const { post, totalPost, lastMonthPosts } = await post_svc.getAllPosts(
+        req
+      );
+      res.status(200).json({
+        status: true,
+        posts: post,
+        toatalPosts: totalPost,
+        lastmonthPosts: lastMonthPosts,
+        msg: "post fetched success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 module.exports = PostController;
