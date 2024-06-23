@@ -7,3 +7,4 @@ export const updateUser = `${host}/api/v1/user/update`;
 export const deleteUser = `${host}/api/v1/user/delete`;
 export const signOutRoute = `${host}/api/v1/user/signout`;
 export const createPostRoute = `${host}/api/v1/admin/createpost`;
+export const fetchPostsRoute = `${host}/api/v1/admin/allposts`;
