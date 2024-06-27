@@ -8,6 +8,7 @@ const DashPost = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -20,6 +21,9 @@ const DashPost = () => {
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
+          if (data.posts.length < 9) {
+            setShowMore(false);
+          }
         } else {
           throw new Error("Failed to fetch posts");
         }
@@ -39,6 +43,25 @@ const DashPost = () => {
   if (isLoading) {
     return <div>Loading...</div>; // Display loading indicator
   }
+
+  const handleShowMore = async () => {
+    const startIndx = userPosts.length;
+    try {
+      const res = await fetch(
+        `${fetchPostsRoute}?userId=${currentUser.user._id}&startIndex=${startIndx}`
+      );
+      const data = await res.json();
+      console.log(data);
+      if (res.ok) {
+        setUserPosts((prev) => [...prev, ...data.posts]);
+        if (data.posts.length < 9) {
+          setShowMore(false);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
@@ -97,6 +120,14 @@ const DashPost = () => {
               ))}
             </Table.Body>
           </Table>
+          {showMore && (
+            <button
+              onClick={handleShowMore}
+              className="w-full text-teal-500 self-center text-sm py-7"
+            >
+              Show more
+            </button>
+          )}
         </>
       ) : (
         <p>You have no posts yet!</p> // Fixed typo
