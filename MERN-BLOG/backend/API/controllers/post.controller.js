@@ -45,16 +45,33 @@ class PostController {
   };
 
   static deletePost = async (req, res, next) => {
-    console.log(req.user.id);
-    console.log(req.params.userId);
     if (!req.user.isAdmin || req.user.id !== req.params.userId) {
       return next(new ErrorHandler("you are not allowded to delete the post"));
     }
     try {
-      const deletePost = await post_svc.deletePost();
+      const deletePost = await post_svc.deletePost(req);
       res.status(200).json({
         status: true,
         msg: "The post has been deleted",
+        deletedPost: deletePost,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  static updatePost = async (req, res, next) => {
+    console.log(req.user.id);
+    console.log(req.params.userId);
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(new ErrorHandler("You are not allowd to edit the post"));
+    }
+    try {
+      const updatePost = await post_svc.updatePost(req);
+      res.status(200).json({
+        status: true,
+        updatePost: updatePost,
+        msg: "Post has been updated",
       });
     } catch (error) {
       next(error);

@@ -12,4 +12,8 @@ router
   .route("/admin/deletepost/:postId/:userId")
   .delete(isAuthenticated, postController.deletePost);
 
+router
+  .route("/admin/updatepost/:postId/:userId")
+  .put(isAuthenticated, postController.updatePost);
+
 module.exports = router;

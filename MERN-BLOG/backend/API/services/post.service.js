@@ -59,9 +59,29 @@ class PostService {
     }
   };
 
-  static deletePost = async () => {
+  static deletePost = async (req) => {
     const deletedPost = await postModel.findByIdAndDelete(req.params.postId);
     return deletedPost;
+  };
+
+  static updatePost = async (req) => {
+    try {
+      const updatedPost = await postModel.findByIdAndUpdate(
+        req.params.postId,
+        {
+          $set: {
+            title: req.body.title,
+            content: req.body.content,
+            category: req.body.category,
+            image: req.body.image,
+          },
+        },
+        { new: true }
+      );
+      return updatedPost;
+    } catch (error) {
+      throw error;
+    }
   };
 }
 module.exports = PostService;

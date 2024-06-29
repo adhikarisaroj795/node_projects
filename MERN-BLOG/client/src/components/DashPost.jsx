@@ -54,7 +54,7 @@ const DashPost = () => {
         `${fetchPostsRoute}?userId=${currentUser.user._id}&startIndex=${startIndx}`
       );
       const data = await res.json();
-      console.log(data);
+
       if (res.ok) {
         setUserPosts((prev) => [...prev, ...data.posts]);
         if (data.posts.length < 9) {
@@ -70,12 +70,12 @@ const DashPost = () => {
     setShowModal(false);
     try {
       const deleteRoute = `${deletePostRoute}/${postIdToDelete}/${currentUser.user._id}`;
-      console.log(deleteRoute);
+
       const res = await fetch(deleteRoute, {
         method: "DELETE",
         credentials: "include",
       });
-      console.log(res);
+
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
@@ -143,7 +143,7 @@ const DashPost = () => {
                   <Table.Cell>
                     <Link
                       className="text-teal-500 hover:underline"
-                      to={`/update-post${post._id}`}
+                      to={`/update-post/${post._id}`}
                     >
                       <span>Edit</span>
                     </Link>

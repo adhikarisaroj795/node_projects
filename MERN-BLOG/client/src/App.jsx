@@ -11,6 +11,7 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import ComSlider from "./components/ComSlider";
 import OnlyAdminPrivateRoutes from "./pages/OnlyAdminPrivateRoute";
 import CreateAPost from "./pages/CreateAPost";
+import UpdatePost from "./pages/UpdatePost";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         </Route>
         <Route element={<OnlyAdminPrivateRoutes />}>
           <Route path="/create-post" element={<CreateAPost />} />
+          <Route path="/update-post/:postId/" element={<UpdatePost />} />
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
