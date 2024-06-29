@@ -12,6 +12,7 @@ import ComSlider from "./components/ComSlider";
 import OnlyAdminPrivateRoutes from "./pages/OnlyAdminPrivateRoute";
 import CreateAPost from "./pages/CreateAPost";
 import UpdatePost from "./pages/UpdatePost";
+import PostPage from "./pages/PostPage";
 
 const App = () => {
   return (
@@ -30,7 +31,8 @@ const App = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/slider" element={<ComSlider />} />
+
+        <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterComp />
     </BrowserRouter>
