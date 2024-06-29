@@ -64,7 +64,7 @@ class userController {
     }
     console.log(paramId);
     console.log(req.user.id);
-    if (req.user.id !== paramId) {
+    if (!req.user.isAdmin && req.user.id !== paramId) {
       return next(
         new ErrorHandler("You are not allowded to delete the account", 404)
       );
