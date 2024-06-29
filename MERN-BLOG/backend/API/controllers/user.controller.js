@@ -88,6 +88,25 @@ class userController {
       next(error);
     }
   };
+
+  getAllUsers = async (req, res, next) => {
+    if (!req.user.isAdmin) {
+      return next(new ErrorHandler("Unauthorized"));
+    }
+    try {
+      const { usersWithOutPAss, totalUser, lastMonthUsers } =
+        await this.usr_svc.getUsers(req);
+      res.status(200).json({
+        status: true,
+        users: usersWithOutPAss,
+        msg: "User fetched Success",
+        totalUser: totalUser,
+        lastMonthUsers: lastMonthUsers,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = userController;

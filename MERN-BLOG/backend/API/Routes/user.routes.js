@@ -11,4 +11,8 @@ router
 
 router.route("/user/signout").post(usr_ctrl.signOut);
 
+router
+  .route("/user/admin/getallusers")
+  .get(isAuthenticated, usr_ctrl.getAllUsers);
+
 module.exports = router;

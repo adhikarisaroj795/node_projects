@@ -33,7 +33,42 @@ class userService {
       throw error;
     }
   };
-  
+
+  getUsers = async (req) => {
+    try {
+      const startIndex = parseInt(req.query.startIndex) || 0;
+      const limit = parseInt(req.query.limit) || 9;
+      const sortDirection = req.query.sort === "asc" ? 1 : -1;
+
+      const allUsers = await userModel
+        .find()
+        .sort({ createdAt: sortDirection })
+        .skip(startIndex)
+        .limit(limit);
+
+      const usersWithOutPAss = allUsers.map((user) => {
+        const { password, ...rest } = user._doc;
+        return rest;
+      });
+
+      const totalUser = await userModel.countDocuments();
+
+      const now = new Date();
+      const oneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        now.getDate()
+      );
+
+      const lastMonthUsers = await userModel.countDocuments({
+        createdAt: { $gte: oneMonthAgo },
+      });
+
+      return { usersWithOutPAss, totalUser, lastMonthUsers };
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = userService;
