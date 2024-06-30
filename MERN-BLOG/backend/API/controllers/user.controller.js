@@ -107,6 +107,20 @@ class userController {
       next(error);
     }
   };
+
+  getUser = async (req, res, next) => {
+    try {
+      const user = await this.usr_svc.getUser(req.params.userId);
+
+      res.status(200).json({
+        status: true,
+        user: user,
+        msg: "user fetched success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = userController;

@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model");
+const ErrorHandler = require("../utils/error.handler");
 
 class userService {
   updateUser = async (id, req) => {
@@ -65,6 +66,19 @@ class userService {
       });
 
       return { usersWithOutPAss, totalUser, lastMonthUsers };
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getUser = async (id) => {
+    try {
+      const user = await userModel.findById(id);
+      if (!user) {
+        return new ErrorHandler("User not found", 404);
+      }
+      const { password, ...rest } = user._doc;
+      return rest;
     } catch (error) {
       throw error;
     }

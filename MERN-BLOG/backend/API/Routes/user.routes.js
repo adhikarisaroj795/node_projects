@@ -15,4 +15,5 @@ router
   .route("/user/admin/getallusers")
   .get(isAuthenticated, usr_ctrl.getAllUsers);
 
+router.route("/:userId").get(usr_ctrl.getUser);
 module.exports = router;

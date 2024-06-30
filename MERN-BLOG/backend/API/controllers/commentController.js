@@ -22,6 +22,21 @@ class CommentController {
       next(error);
     }
   };
+
+  static getPostComment = async (req, res, next) => {
+    try {
+      const postId = req.params.postId;
+      const comment = await cmt_svc.getPostComment(postId);
+
+      res.status(200).json({
+        status: true,
+        comments: comment,
+        msg: "comment fetched success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = CommentController;
