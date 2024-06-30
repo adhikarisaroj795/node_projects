@@ -11,3 +11,4 @@ export const updatePostRoute = `${host}/api/v1/admin/updatepost`;
 export const fetchPostsRoute = `${host}/api/v1/admin/allposts`;
 export const fetchUsersRoute = `${host}/api/v1/user/admin/getallusers`;
 export const deletePostRoute = `${host}/api/v1/admin/deletepost`;
+export const postCommentRoute = `${host}/api/v1/comment/create`;
