@@ -14,3 +14,4 @@ export const deletePostRoute = `${host}/api/v1/admin/deletepost`;
 export const postCommentRoute = `${host}/api/v1/comment/create`;
 export const getCommentRoute = `${host}/api/v1/comment/getComment`;
 export const fetchUserRoute = `${host}/api/v1`;
+export const commentLikeRoute = `${host}/api/v1/comment/like`;

@@ -9,6 +9,8 @@ router
   .route("/comment/getComment/:postId")
   .get(isAuthenticated, cmt_ctrl.getPostComment);
 
+router.route("/comment/like/:commentId").put(isAuthenticated,cmt_ctrl.likeComment);
+
 module.exports = router;
 
 // 8 : 38

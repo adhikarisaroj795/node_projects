@@ -37,6 +37,20 @@ class CommentController {
       next(error);
     }
   };
+
+  static likeComment = async (req, res, next) => {
+    try {
+      const userId = req.user.id;
+      const commentId = req.params.commentId;
+      const comment = await cmt_svc.newComment(commentId, userId);
+      res.status(200).json({
+        status: 200,
+        comment: comment,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = CommentController;

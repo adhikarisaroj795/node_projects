@@ -10,7 +10,7 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
-const signIn = () => {
+const SignIn = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -20,14 +20,14 @@ const signIn = () => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    // const { name, value } = e.target;
+    const { id, value } = e.target;
 
     setUserData({
       ...userData,
-      // [name]: [value],
-      [e.target.id]: e.target.value.trim(),
+      [id]: value.trim(),
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userData.email || !userData.password) {
@@ -44,18 +44,18 @@ const signIn = () => {
       const data = await res.json();
 
       if (data.status === false) {
-        dispatch(signInFalure(data.errorMessage));
+        return dispatch(signInFalure(data.errorMessage));
       }
 
       if (res.ok) {
         dispatch(signInSuccess(data));
-
         navigate("/");
       }
     } catch (error) {
-      dispatch(signInFalure(error.errorMessage));
+      dispatch(signInFalure(error.message));
     }
   };
+
   return (
     <div className="min-h-screen mt-20">
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -67,7 +67,7 @@ const signIn = () => {
             Blog
           </Link>
           <p className="text-sm mt-5">
-            You can signIn with your email and password or with Google
+            You can sign in with your email and password or with Google
           </p>
         </div>
         <div className="flex-1">
@@ -79,7 +79,7 @@ const signIn = () => {
                 placeholder="name@company.com"
                 id="email"
                 name="email"
-                // value={userData.email}
+                value={userData.email}
                 onChange={handleChange}
               />
             </div>
@@ -90,7 +90,7 @@ const signIn = () => {
                 placeholder="************"
                 id="password"
                 name="password"
-                // value={userData.password}
+                value={userData.password}
                 onChange={handleChange}
               />
             </div>
@@ -99,21 +99,19 @@ const signIn = () => {
               type="submit"
               disabled={loading}
             >
-              <>
-                {loading ? (
-                  <>
-                    <Spinner size="sm" />
-                    <span className="pl-3">Loading....</span>
-                  </>
-                ) : (
-                  "Sign In"
-                )}
-              </>
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading....</span>
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
             <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Dont have an account?</span>
+            <span>Don't have an account?</span>
             <Link to="/sign-up" className="text-blue-500">
               Sign Up
             </Link>
@@ -129,4 +127,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default SignIn;

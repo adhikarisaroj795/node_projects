@@ -1,8 +1,12 @@
 import { Alert, Button, Textarea } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import { postCommentRoute, getCommentRoute } from "../utils/APIRoutes";
+import {
+  postCommentRoute,
+  getCommentRoute,
+  commentLikeRoute,
+} from "../utils/APIRoutes";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 
 const CommentSection = ({ postId }) => {
@@ -10,6 +14,7 @@ const CommentSection = ({ postId }) => {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +38,6 @@ const CommentSection = ({ postId }) => {
       if (res.ok) {
         setComment("");
         setComments((prevComments) => [...prevComments, data.comment]);
-
         setCommentError(null);
       } else {
         setCommentError(data.message || "Error posting comment");
@@ -63,6 +67,35 @@ const CommentSection = ({ postId }) => {
     };
     getComments();
   }, [postId]);
+
+  const handleLike = async (commentId) => {
+    try {
+      if (!currentUser) {
+        navigate("/sign-in");
+        return;
+      }
+      const res = await fetch(`${commentLikeRoute}/${commentId}`, {
+        method: "PUT",
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setComments(
+          comments.map((comment) =>
+            comment._id === commentId
+              ? {
+                  ...comment,
+                  likes: data.likes,
+                  numberOfLikes: data.numberOfLikes,
+                }
+              : comment
+          )
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
@@ -126,9 +159,15 @@ const CommentSection = ({ postId }) => {
               <p>{comments.length}</p>
             </div>
           </div>
-          {comments.map((comment) => (
-            <Comment key={comment._id} comment={comment} />
-          ))}
+          {comments
+            .filter((comment) => comment !== undefined && comment !== null)
+            .map((comment) => (
+              <Comment
+                key={comment._id}
+                comment={comment}
+                onLike={handleLike}
+              />
+            ))}
         </>
       )}
     </div>
