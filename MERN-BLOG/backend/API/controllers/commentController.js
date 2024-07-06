@@ -73,6 +73,26 @@ class CommentController {
       next(error);
     }
   };
+  static deleteComment = async (req, res, next) => {
+    try {
+      const commentId = req.params.commentId;
+      const isAdmin = req.user.isAdmin;
+      const userId = req.user.id;
+      const deletedComment = await cmt_svc.deleteComment(
+        commentId,
+        isAdmin,
+        userId
+      );
+
+      res.status(200).json({
+        status: true,
+        deletedComment: deletedComment,
+        msg: "comment deleted success",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   static;
 }

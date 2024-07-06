@@ -73,6 +73,25 @@ class CommentService {
       next(error);
     }
   };
+
+  static deleteComment = async (commentId, userId, isAdmin) => {
+    try {
+      const comment = await commentModel.findById(commentId);
+      if (!commentId) {
+        throw new ErrorHandler("Comment not found");
+      }
+      if (comment.userId !== userId && !isAdmin) {
+        throw new ErrorHandler(
+          "you are not allowdedt to delete this comment",
+          403
+        );
+      }
+      const deletedComment = await commentModel.findByIdAndDelete(commentId);
+      return deletedComment;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = CommentService;

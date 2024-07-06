@@ -15,6 +15,9 @@ router
 router
   .route("/comment/edit/:commentId")
   .put(isAuthenticated, cmt_ctrl.editComment);
+router
+  .route("/comment/delete/:commentId")
+  .delete(isAuthenticated, cmt_ctrl.deleteComment);
 
 module.exports = router;
 
