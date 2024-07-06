@@ -92,6 +92,33 @@ class CommentService {
       throw error;
     }
   };
+
+  static getAllComments = async (stIndex, cmtLimit, sort) => {
+    try {
+      const startIndex = parseInt(stIndex) || 0;
+      const limit = parseInt(cmtLimit) || 9;
+      const sortDirection = sort === "desc" ? -1 : 1;
+      const comments = await commentModel
+        .find()
+        .sort({ createdAt: sortDirection })
+        .skip(startIndex)
+        .limit(limit);
+      const totalComments = await commentModel.countDocuments();
+      const now = new Date();
+
+      const oneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        now.getDate()
+      );
+      const lastMonthComments = await commentModel.countDocuments({
+        createdAt: { $gte: oneMonthAgo },
+      });
+      return { comments, totalComments, lastMonthComments };
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = CommentService;
