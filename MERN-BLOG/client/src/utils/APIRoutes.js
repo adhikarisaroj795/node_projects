@@ -15,3 +15,4 @@ export const postCommentRoute = `${host}/api/v1/comment/create`;
 export const getCommentRoute = `${host}/api/v1/comment/getComment`;
 export const fetchUserRoute = `${host}/api/v1`;
 export const commentLikeRoute = `${host}/api/v1/comment/like`;
+export const editCommentRoute = `${host}/api/v1/comment/edit`;

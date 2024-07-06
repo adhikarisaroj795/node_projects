@@ -51,6 +51,30 @@ class CommentController {
       next(error);
     }
   };
+
+  static editComment = async (req, res, next) => {
+    const commentId = req.params.commentId;
+    const isAdmin = req.user.isAdmin;
+    const userId = req.user.id;
+    const content = req.body.content;
+    try {
+      const comment = await cmt_svc.editComment(
+        commentId,
+        userId,
+        isAdmin,
+        content
+      );
+      res.status(200).json({
+        status: true,
+        editedComment: comment,
+        msg: "comment edited",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  static;
 }
 
 module.exports = CommentController;

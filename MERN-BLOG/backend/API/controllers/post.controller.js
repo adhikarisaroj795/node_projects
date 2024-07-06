@@ -32,6 +32,7 @@ class PostController {
       const { post, totalPost, lastMonthPosts } = await post_svc.getAllPosts(
         req
       );
+
       res.status(200).json({
         status: true,
         posts: post,
@@ -61,8 +62,6 @@ class PostController {
   };
 
   static updatePost = async (req, res, next) => {
-    console.log(req.user.id);
-    console.log(req.params.userId);
     if (!req.user.isAdmin || req.user.id !== req.params.userId) {
       return next(new ErrorHandler("You are not allowd to edit the post"));
     }

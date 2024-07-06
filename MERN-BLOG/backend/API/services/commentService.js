@@ -49,6 +49,30 @@ class CommentService {
       throw error;
     }
   };
+
+  static editComment = async (commentId, userId, isAdmin, content) => {
+    try {
+      const comment = await commentModel.findById(commentId);
+      if (!comment) {
+        throw new ErrorHandler("cannot found the comment", 404);
+      }
+      if (comment.userId !== userId && !isAdmin) {
+        throw new ErrorHandler("you are not allowded to edit the comment");
+      }
+      const editedComment = await commentModel.findByIdAndUpdate(
+        commentId,
+        {
+          content: content,
+        },
+        {
+          new: true,
+        }
+      );
+      return editedComment;
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = CommentService;
