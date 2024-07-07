@@ -1,7 +1,7 @@
 import { Modal, Table, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllComments } from "../utils/APIRoutes";
+import { getAllComments, deleteCommentRoute } from "../utils/APIRoutes";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaCheck, FaTimes } from "react-icons/fa";
 
@@ -37,9 +37,10 @@ export default function DashComments() {
   const handleShowMore = async () => {
     const startIndex = comments.length;
     try {
-      const res = await fetch(
-        `/api/comment/getcomments?startIndex=${startIndex}`
-      );
+      const res = await fetch(`${getAllComments}?startIndex=${startIndex}`, {
+        method: "GET",
+        credentials: "include",
+      });
       const data = await res.json();
       if (res.ok) {
         setComments((prev) => [...prev, ...data.comments]);
@@ -55,12 +56,10 @@ export default function DashComments() {
   const handleDeleteComment = async () => {
     setShowModal(false);
     try {
-      const res = await fetch(
-        `/api/comment/deleteComment/${commentIdToDelete}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`${deleteCommentRoute}/${commentIdToDelete}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
       const data = await res.json();
       if (res.ok) {
         setComments((prev) =>

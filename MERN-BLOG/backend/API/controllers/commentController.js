@@ -95,17 +95,17 @@ class CommentController {
   };
 
   static getComments = async (req, res, next) => {
-    if (!req.user.isAdmin) {
-      return next(
-        new ErrorHandler("you are not allowded to get all comments", 403)
-      );
-    }
     try {
+      if (!req.user.isAdmin) {
+        return next(
+          new ErrorHandler("you are not allowded to get all comments", 403)
+        );
+      }
       const stIndex = req.query.startIndex;
       const limit = req.query.limit;
       const sort = req.query.sort;
       const { comments, totalComments, lastMonthComments } =
-        cmt_svc.getAllComments(stIndex, limit, sort);
+        await cmt_svc.getAllComments(stIndex, limit, sort);
       res.status(200).json({
         status: true,
         comments: comments,
