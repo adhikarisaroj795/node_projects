@@ -40,8 +40,6 @@ class PostService {
         .skip(startIndex)
         .limit(limit);
 
-      console.log(post);
-
       const totalPost = await postModel.countDocuments(filters);
       const now = new Date();
 
