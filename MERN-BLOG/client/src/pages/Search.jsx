@@ -1,5 +1,5 @@
 import { Button, Select, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { fetchPostsRoute } from "../utils/APIRoutes";
@@ -12,11 +12,27 @@ export default function Search() {
   });
 
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowMoreLoading, setIsShowMoreLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const fetchPosts = useCallback(async (params) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${fetchPostsRoute}?${params}`);
+      if (!res.ok) throw new Error("Failed to fetch posts");
+      const data = await res.json();
+      setPosts(data.posts);
+      setShowMore(data.posts.length === 9);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -31,58 +47,43 @@ export default function Search() {
       category: categoryFromUrl,
     }));
 
-    const fetchPosts = async () => {
-      setLoading(true);
-      const searchQuery = urlParams.toString();
-      const res = await fetch(`${fetchPostsRoute}?${searchQuery}`);
-
-      if (!res.ok) {
-        setLoading(false);
-        return;
-      }
-
-      const data = await res.json();
-      setPosts(data.posts);
-      setLoading(false);
-      setShowMore(data.posts.length === 9);
-    };
-
-    fetchPosts();
-
-    return () => {
-      setLoading(false);
-    };
-  }, [location.search]);
+    fetchPosts(urlParams.toString());
+  }, [location.search, fetchPosts]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setSidebarData((prevState) => ({
       ...prevState,
-      [id]: value || (id === "sort" ? "desc" : "uncategorized"),
+      [id]: value || (id === "category" ? "uncategorized" : ""),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", sidebarData.searchTerm);
+    const urlParams = new URLSearchParams();
+    if (sidebarData.searchTerm) {
+      urlParams.set("searchTerm", sidebarData.searchTerm);
+    }
     urlParams.set("sort", sidebarData.sort);
     urlParams.set("category", sidebarData.category);
     navigate(`/search?${urlParams.toString()}`);
   };
 
   const handleShowMore = async () => {
-    const numberOfPosts = posts.length;
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("startIndex", numberOfPosts);
-    const searchQuery = urlParams.toString();
-
-    const res = await fetch(`${fetchPostsRoute}?${searchQuery}`);
-
-    if (res.ok) {
+    setIsShowMoreLoading(true);
+    try {
+      const numberOfPosts = posts.length;
+      const urlParams = new URLSearchParams(location.search);
+      urlParams.set("startIndex", numberOfPosts);
+      const res = await fetch(`${fetchPostsRoute}?${urlParams.toString()}`);
+      if (!res.ok) throw new Error("Failed to fetch more posts");
       const data = await res.json();
       setPosts((prevPosts) => [...prevPosts, ...data.posts]);
       setShowMore(data.posts.length === 9);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsShowMoreLoading(false);
     }
   };
 
@@ -122,7 +123,12 @@ export default function Search() {
               <option value="javascript">JavaScript</option>
             </Select>
           </div>
-          <Button type="submit" outline gradientDuoTone="purpleToPink">
+          <Button
+            type="submit"
+            outline
+            gradientDuoTone="purpleToPink"
+            disabled={isLoading}
+          >
             Apply Filters
           </Button>
         </form>
@@ -132,18 +138,19 @@ export default function Search() {
           Posts results:
         </h1>
         <div className="p-7 flex flex-wrap gap-4">
-          {!loading && posts.length === 0 && (
+          {isLoading && <p className="text-xl text-gray-500">Loading...</p>}
+          {!isLoading && posts.length === 0 && (
             <p className="text-xl text-gray-500">No posts found.</p>
           )}
-          {loading && <p className="text-xl text-gray-500">Loading...</p>}
-          {!loading &&
+          {!isLoading &&
             posts.map((post) => <PostCard key={post._id} post={post} />)}
           {showMore && (
             <button
               onClick={handleShowMore}
               className="text-teal-500 text-lg hover:underline p-7 w-full"
+              disabled={isShowMoreLoading}
             >
-              Show More
+              {isShowMoreLoading ? "Loading..." : "Show More"}
             </button>
           )}
         </div>
