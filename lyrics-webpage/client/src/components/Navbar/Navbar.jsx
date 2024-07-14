@@ -22,6 +22,9 @@ const Navbar = () => {
             <nav>
               <ul>
                 <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
                   <a href="#">Nepali Lyrics</a>
                 </li>
                 <li>
@@ -32,10 +35,10 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
-            <div className="nav-btn">
+            {/* <div className="nav-btn">
               <button className="gbl-btn">Sign In</button>
               <button className="gbl-btn">Sign Up</button>
-            </div>
+            </div> */}
           </div>
         </div>
 

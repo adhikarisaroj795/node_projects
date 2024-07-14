@@ -96,9 +96,10 @@ img {
 }
 
 .container {
-  max-width: 1460px;
+  max-width: 1260px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 50px;
 }
 .section {
   padding: 6rem 0 2rem;

@@ -13,11 +13,10 @@
   border-radius: 20px;
 }
 header {
-  max-width: 1460px;
+  max-width: 1260px;
   margin-left: auto;
   margin-right: auto;
   padding: 10px 30px;
-
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
@@ -34,8 +33,8 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: var(--primary-color);
-  box-shadow: 0 4px 8px rgba(187, 191, 0, 0.1),
-    0 6px 20px rgba(187, 191, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(187, 191, 0, 0.1),
+    0 6px 20px rgba(187, 191, 0, 0.1); */
 }
 .search-input input {
   padding: 8px 50px;
