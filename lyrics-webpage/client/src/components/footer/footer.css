@@ -1,0 +1,68 @@
+.footer-section {
+  background-color: #fff;
+  padding: 50px 0;
+}
+.footer-section footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+footer {
+  max-width: 1460px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 30px;
+}
+.footer-contact-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+footer .socio-icons {
+  font-size: 30px;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.2s ease-in-out;
+}
+.socio-icons :hover {
+  color: #ff0054;
+}
+
+.contact-card {
+  display: flex;
+  gap: 5px;
+}
+
+.contact-card .contact-icon i {
+  font-size: 22px;
+  transition: all 0.1s ease-in-out;
+}
+
+.news-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.news-letter h2 {
+  margin-bottom: 10px;
+}
+
+.news-letter form input {
+  padding: 8px 24px;
+  border: 1px solid var(--primary-color);
+  outline: black;
+}
+.news-letter form button {
+  padding: 8px 24px;
+  border: 1px solid var(--primary-color);
+}
+.news-letter form input:focus {
+  border: 1px solid black;
+}

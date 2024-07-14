@@ -10,6 +10,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   const [user, setUser] = useState({});
   const [editedContent, setEditedContent] = useState(comment.content);
   const [isEditing, setIsEditing] = useState(false);
+  const [likeColor, setLikeColor] = useState("");
 
   useEffect(() => {
     const getUser = async () => {
@@ -91,7 +92,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
                 size={"sm"}
                 gradientDuoTone={"purpleToBlue"}
                 outline
-                onClick={() => isEditing(false)}
+                onClick={() => setIsEditing(false)}
               >
                 Cancel
               </Button>
