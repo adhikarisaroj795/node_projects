@@ -1,5 +1,22 @@
 .latest-song-holder {
   display: flex;
-  gap: 30px;
+  row-gap: 50px;
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+.section h2 {
+  position: relative;
+}
+
+.section h2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -8px;
+  height: 5px;
+  width: 70px;
+  background-color: red;
+}
+.user-name {
+  color: rgb(39, 22, 201);
 }

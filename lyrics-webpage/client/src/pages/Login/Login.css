@@ -1,0 +1,57 @@
+.login-form {
+  padding: 50px;
+  height: 100%;
+  width: 100%;
+}
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 0 50%;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+.login-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+.login-form form label {
+  font-size: 1.2rem;
+}
+.login-form form input {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+}
+.bg-logo {
+  background: url("images/logo.png");
+  height: 500px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 90px 0 0 0;
+}
+
+.bg-logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("images/music.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 90px 0 0 0;
+
+  opacity: 0.3;
+}

@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -22,16 +23,16 @@ const Navbar = () => {
             <nav>
               <ul>
                 <li>
-                  <a href="/">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="#">Nepali Lyrics</a>
+                  <Link to="/nepali-lyrics">Nepali Lyrics</Link>
                 </li>
                 <li>
-                  <a href="#">English Lyrics</a>
+                  <Link to="/english-lyrics">English Lyrics</Link>
                 </li>
                 <li>
-                  <a href="#">Hindi Lyrics</a>
+                  <Link to="/hindi-lyrics">Hindi Lyrics</Link>
                 </li>
               </ul>
             </nav>
