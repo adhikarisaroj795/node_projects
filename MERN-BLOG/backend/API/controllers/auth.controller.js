@@ -23,7 +23,7 @@ class AuthController {
       const newUser = await this.auth_svc.SignUp(username, email, password);
 
       res.status(201).json({
-        status: "true",
+        status: true,
         user: newUser,
         msg: "user created success",
       });

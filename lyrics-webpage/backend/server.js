@@ -2,8 +2,12 @@ const app = require("./app");
 const connectDb = require("./config/databaseConfig");
 
 app.get("/test", (req, res) => {
-  console.log("server hit");
-  res.json("test passed");
+  try {
+    console.log("server hit");
+    res.json("test passed");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 connectDb();
