@@ -36,10 +36,11 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
-            {/* <div className="nav-btn">
-              <button className="gbl-btn">Sign In</button>
-              <button className="gbl-btn">Sign Up</button>
-            </div> */}
+            <div className="nav-btn">
+              <Link to={"/login"}>
+                <button className="gbl-btn">Sign In</button>
+              </Link>
+            </div>
           </div>
         </div>
 

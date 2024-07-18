@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import signIn from "../../pages/SignIn";
 
 const initialState = {
   currentUser: null,
@@ -58,7 +57,8 @@ const userSlice = createSlice({
       (state.currentUser = null), (state.loading = false), (state.error = null);
     },
     signOutFailure: (state, action) => {
-      (state.loading = false), (state.error = action.payload);
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });

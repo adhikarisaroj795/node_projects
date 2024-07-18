@@ -1,18 +1,30 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { login } from "../../utils/APIRoutes";
+
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+  resetError,
+} from "../../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+
+  const { loading, error: globalError } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,38 +40,48 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!navigator.onLine) {
-      toast.error("No internet connection. Please check your network.");
-      return;
+      return dispatch(
+        signInFailure("No internet connection. Please check your network.")
+      );
     }
+
     if (!userData.email || !userData.password) {
-      toast.error("All fields are required");
-      return;
+      return dispatch(signInFailure("All fields are required"));
     }
+
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch(login, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
+        credentials: "include",
       });
 
       const data = await res.json();
       if (data.status === true) {
-        toast.success(data.msg);
+        dispatch(signInSuccess(data));
         navigate("/");
       } else {
-        toast.error(data.errorMessage);
+        dispatch(signInFailure(data.errorMessage));
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("An error occurred while logging in. Please try again.");
-    } finally {
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
+
+  useEffect(() => {
+    if (globalError) {
+      toast.error(globalError);
+      // Reset the global error state after showing the toast notification
+      dispatch(resetError());
+    }
+  }, [globalError, dispatch]);
 
   return (
     <>
