@@ -1,7 +1,11 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const [showDropdown, setShowDropdown] = useState(false);
   return (
     <div className="header-navbar">
       <header>
@@ -37,9 +41,33 @@ const Navbar = () => {
               </ul>
             </nav>
             <div className="nav-btn">
-              <Link to={"/login"}>
-                <button className="gbl-btn">Sign In</button>
-              </Link>
+              {currentUser ? (
+                <div className="profile-details">
+                  <div className="profile-pic">
+                    <img src="images/2.png" alt="" />
+                  </div>
+                  <div className="profile-dropdown">
+                    <div className="slot-1">
+                      <span>@{currentUser.user.fullname}</span>
+                      <span>{currentUser.user.email}</span>
+                    </div>
+                    <div className="slot-1">
+                      <Link>
+                        <span>Profile</span>
+                      </Link>
+                    </div>
+                    <div className="slot-1">
+                      <Link>
+                        <span>Sign out</span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link to={"/login"}>
+                  <button className="gbl-btn">Sign In</button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
