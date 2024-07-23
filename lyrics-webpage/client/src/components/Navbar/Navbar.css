@@ -178,7 +178,13 @@ input:focus {
   border-radius: 0 0 50px 0;
 }
 .profile-dropdown .slot-1 {
+  display: flex;
+  flex-direction: column;
+
   font-size: 0.9rem;
+}
+.profile-dropdown .slot-1 span {
+  display: block;
 }
 
 .profile-dropdown {

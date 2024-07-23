@@ -1,11 +1,50 @@
 import "./Navbar.css";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "../../utils/APIRoutes";
+import { toast } from "react-toastify";
+
+import {
+  signOutFailure,
+  signOutStart,
+  signOutSuccess,
+  resetError,
+} from "../../redux/user/userSlice";
 
 const Navbar = () => {
+  const { loading, error: globalError } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const { currentUser } = useSelector((state) => state.user);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutStart());
+      const res = await fetch(logOut, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.status === false) {
+        console.log(data.errorMessage);
+      } else {
+        dispatch(signOutSuccess());
+        navigate("/login");
+      }
+    } catch (error) {
+      dispatch(signOutFailure(error.message));
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (globalError) {
+      toast.error(globalError);
+      // Reset the global error state after showing the toast notification
+      dispatch(resetError());
+    }
+  }, [globalError, dispatch]);
   return (
     <div className="header-navbar">
       <header>
@@ -48,8 +87,14 @@ const Navbar = () => {
                   </div>
                   <div className="profile-dropdown">
                     <div className="slot-1">
-                      <span>@{currentUser.user.fullname}</span>
-                      <span>{currentUser.user.email}</span>
+                      {currentUser.user.fullname ? (
+                        <>
+                          <span>@{currentUser.user.fullname}</span>
+                          <span>{currentUser.user.email}</span>
+                        </>
+                      ) : (
+                        <span>anomonous user</span>
+                      )}
                     </div>
                     <div className="slot-1">
                       <Link>
@@ -57,7 +102,7 @@ const Navbar = () => {
                       </Link>
                     </div>
                     <div className="slot-1">
-                      <Link>
+                      <Link onClick={handleSignOut}>
                         <span>Sign out</span>
                       </Link>
                     </div>

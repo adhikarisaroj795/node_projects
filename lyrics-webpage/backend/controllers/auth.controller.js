@@ -40,6 +40,16 @@ class AuthController {
       next(error);
     }
   };
+  static signOut = async (req, res, next) => {
+    try {
+      res.clearCookie("token").status(200).json({
+        status: true,
+        msg: "User has signedOut successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 module.exports = AuthController;

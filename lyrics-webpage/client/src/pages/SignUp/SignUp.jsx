@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Login/Login";
 import "./signUp.css";
 import { signUpRoutes } from "../../utils/APIRoutes";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi"; // Import icons from react-icons library
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signUpFailure,
+  signUpStart,
+  signUpSuccess,
+  resetError,
+  signInFailure,
+} from "../../redux/user/userSlice";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -13,9 +21,11 @@ const SignUp = () => {
     password: "",
   });
 
-  const [loading, setLoading] = useState(false);
+  const { loading, error: globalError } = useSelector((state) => state.user);
+
   const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setUserData({
@@ -27,15 +37,15 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!navigator.onLine) {
-      toast.error("No internet connection. Please check your network.");
-      return;
+      return dispatch(
+        signUpFailure("No internet connection. Please check your network.")
+      );
     }
     if (!userData.fullname || !userData.email || !userData.password) {
-      toast.error("Please fill all the input fields");
-      return;
+      return dispatch(signUpFailure("All fields are required"));
     }
     try {
-      setLoading(true);
+      dispatch(signUpStart());
       const res = await fetch(signUpRoutes, {
         method: "POST",
         headers: {
@@ -46,24 +56,30 @@ const SignUp = () => {
       const data = await res.json();
 
       if (data.status === true) {
-        toast.success(data.msg);
+        dispatch(signUpSuccess(data.msg));
         navigate("/login");
       } else {
         toast.error(
           data.errorMessage || "Failed to sign up. Please try again."
         );
+        dispatch(signUpFailure(data.errorMessage));
       }
     } catch (error) {
       console.error("Signup error:", error);
-      toast.error("An error occurred while signing up. Please try again.");
-    } finally {
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  useEffect(() => {
+    if (globalError) {
+      toast.error(globalError);
+      // Reset the global error state after showing the toast notification
+      dispatch(resetError());
+    }
+  }, [globalError, dispatch]);
 
   return (
     <>

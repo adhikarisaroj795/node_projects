@@ -1,14 +1,19 @@
-import React from "react";
 import LatestSongs from "../../components/LatestSongs/LatestSongs";
 import results from "../Home/dataa";
+import { useSelector } from "react-redux";
 import "./home.css";
 
 const Home = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div className="container">
       <div className="section">
         <span>
-          Welcome back <span className="user-name">saroj</span>
+          Welcome back{" "}
+          <span className="user-name">
+            {currentUser ? currentUser.user.fullname : "User"}
+          </span>
         </span>
 
         <h2 className="m-b-25">Latest Songs</h2>
